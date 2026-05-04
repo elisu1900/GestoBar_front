@@ -1,0 +1,46 @@
+/* =============================================
+   GestoBar FX - Splash Screen Styles
+   ============================================= */
+
+/* Fondo principal */
+#rootPane {
+    -fx-background-color: #1F2937;
+}
+
+/* Contenedor del icono */
+#iconContainer .rectangle {
+    -fx-fill: #2D3F55;
+    -fx-arc-width: 18;
+    -fx-arc-height: 18;
+}
+
+/* Texto "Gesto" (azul) */
+#labelGesto {
+    -fx-text-fill: #5B9BD5;
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Segoe UI";
+}
+
+/* Texto "Bar FX" (blanco) */
+#labelBarFX {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Segoe UI";
+}
+
+/* Spinner de carga */
+#loadingSpinner {
+    -fx-progress-color: #5B9BD5;
+    -fx-accent: #5B9BD5;
+    -fx-pref-width: 28px;
+    -fx-pref-height: 28px;
+}
+
+/* Texto "Loading..." */
+#loadingLabel {
+    -fx-text-fill: #6B7280;
+    -fx-font-size: 12px;
+    -fx-font-family: "Segoe UI";
+}

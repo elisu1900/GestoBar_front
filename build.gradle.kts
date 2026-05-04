@@ -27,7 +27,7 @@ tasks.withType<JavaCompile> {
 
 application {
     mainModule.set("com.elias.gestobar")
-    mainClass.set("com.elias.gestobar.HelloApplication")
+    mainClass.set("com.elias.gestobar.Launcher")
 }
 
 javafx {

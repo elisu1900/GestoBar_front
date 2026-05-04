@@ -1,5 +1,7 @@
 package com.elias.gestobar;
 
+import com.elias.gestobar.config.AppConfig;
+import com.elias.gestobar.controllers.Router;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -7,20 +9,24 @@ import javafx.stage.Stage;
 
 public class Launcher extends Application {
 
+    // MainApp.java
+
     @Override
-    public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(
-                getClass().getResource("/com/elias/gestobar/view/splash.fxml")
-        );
+    public void start(Stage stage) {
+        Router.init(stage);
 
-        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle(AppConfig.getWindowTitle());
+        stage.setWidth(AppConfig.getWindowWidth());
+        stage.setHeight(AppConfig.getWindowHeight());
+        stage.setMaximized(AppConfig.isMaximized());
+        stage.setResizable(true);
 
-        stage.setTitle("GestoBar");
-        stage.setScene(scene);
+        Router.goTo("splash");
         stage.show();
     }
 
     public static void main(String[] args) {
-        launch();
+        launch(args);
     }
+
 }

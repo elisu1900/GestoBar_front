@@ -10,7 +10,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-// router/Router.java
 public class Router {
 
     private static Stage primaryStage;
@@ -41,7 +40,6 @@ public class Router {
             if (scene == null) {
                 primaryStage.setScene(new Scene(root));
             } else {
-                // Reutilizar la Scene para evitar parpadeos
                 scene.setRoot(root);
             }
 
@@ -53,16 +51,11 @@ public class Router {
         }
     }
 
-    // --- Shortcuts semánticos ---
-    public static void gotToSplash()         { goTo("splash"); }
+    //Shortcuts
+    public static void goToSplash()          { goTo("splash"); }
     public static void goToLogin()           { goTo("login"); }
-    public static void goToDashboardAdmin()  { goTo("dashboard-admin", Role.ADMIN); }
-    public static void goToDashboardWaiter() { goTo("dashboard-waiter"); }
-    public static void goToAdmin()           { goTo("admin", Role.ADMIN); }
-    public static void goToTables()          { goTo("tables"); }
-    public static void goToMain() { goTo("main"); }
-    public static void goToTicket(Long ticketId) {
-        SessionManager.getInstance().setActiveTicketId(ticketId);
-        goTo("ticket");
-    }
+    public static void goToMain()            { goTo("main"); }
+    public static void goToAdmin()           { goTo("administration", Role.ADMIN); }
+    public static void goToDailyBalance()    { goTo("daily-balance", Role.ADMIN); }
+    public static void goToUsers()           { goTo("users", Role.ADMIN); }
 }

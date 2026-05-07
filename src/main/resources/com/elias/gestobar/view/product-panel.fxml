@@ -10,8 +10,7 @@
       fx:controller="com.elias.gestobar.controllers.ProductPanelController"
       stylesheets="@../css/styles.css"
       styleClass="panel-dark panel-section"
-      VBox.vgrow="ALWAYS"
-      HBox.vgrow="ALWAYS">
+      VBox.vgrow="ALWAYS">
 
     <Label text="Products"
            styleClass="section-title"/>

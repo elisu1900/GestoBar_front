@@ -11,15 +11,12 @@
             minHeight="650">
 
     <top>
-        <fx:include source="navbar.fxml"/>
+        <fx:include fx:id="navbar" source="navbar.fxml"/>
     </top>
-
     <center>
-        <fx:include source="content-area.fxml"/>
+        <fx:include fx:id="contentArea" source="content-area.fxml"/>
     </center>
-
     <right>
-        <fx:include source="order-panel.fxml"/>
+        <fx:include fx:id="orderPanel" source="order-panel.fxml"/>
     </right>
-
 </BorderPane>

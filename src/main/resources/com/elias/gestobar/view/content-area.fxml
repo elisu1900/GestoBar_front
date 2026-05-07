@@ -12,14 +12,8 @@
       VBox.vgrow="ALWAYS">
 
     <VBox styleClass="left-column">
-
-        <fx:include source="table-panel.fxml"/>
-
-        <fx:include source="calculator.fxml"/>
-
+        <fx:include fx:id="tablePanel" source="table-panel.fxml"/>
+        <fx:include fx:id="calculator" source="calculator.fxml"/>
     </VBox>
-
-    <fx:include source="product-panel.fxml"
-                HBox.hgrow="ALWAYS"/>
-
+    <fx:include fx:id="productPanel" source="product-panel.fxml" HBox.hgrow="ALWAYS"/>
 </HBox>

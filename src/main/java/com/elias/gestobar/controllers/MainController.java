@@ -3,16 +3,22 @@ package com.elias.gestobar.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.layout.BorderPane;
 
-import java.awt.desktop.AppEvent;
-
-
 public class MainController {
 
-    @FXML
-    private BorderPane rootPane;
+    @FXML private BorderPane rootPane;
+
+    @FXML private NavbarController navbarController;
+    @FXML private ContentAreaController contentAreaController;
+    @FXML private OrderPanelController orderPanelController;
 
     @FXML
     public void initialize() {
-        AppEvent.clearAll();
+        contentAreaController.getTablePanelController()
+                .setOrderPanelController(orderPanelController);
+        contentAreaController.getTablePanelController()
+                .setNavbarController(navbarController);
+
+        contentAreaController.getProductPanelController()
+                .setOrderPanelController(orderPanelController);
     }
 }

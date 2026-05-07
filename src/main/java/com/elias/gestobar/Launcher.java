@@ -9,8 +9,6 @@ import javafx.stage.Stage;
 
 public class Launcher extends Application {
 
-    // MainApp.java
-
     @Override
     public void start(Stage stage) {
         Router.init(stage);

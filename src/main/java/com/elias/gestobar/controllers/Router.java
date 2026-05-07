@@ -60,6 +60,7 @@ public class Router {
     public static void goToDashboardWaiter() { goTo("dashboard-waiter"); }
     public static void goToAdmin()           { goTo("admin", Role.ADMIN); }
     public static void goToTables()          { goTo("tables"); }
+    public static void goToMain() { goTo("main"); }
     public static void goToTicket(Long ticketId) {
         SessionManager.getInstance().setActiveTicketId(ticketId);
         goTo("ticket");

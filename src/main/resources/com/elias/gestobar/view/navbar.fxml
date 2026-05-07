@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+
+<HBox fx:id="navbar"
+      xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.elias.gestobar.controllers.NavbarController"
+      stylesheets="@../css/styles.css"
+      alignment="CENTER_LEFT"
+      spacing="4"
+      styleClass="navbar">
+
+    <HBox spacing="0" alignment="CENTER_LEFT">
+
+        <Label fx:id="labelGesto"
+               text="Gesto"
+               styleClass="logo-gesto"/>
+
+        <Label fx:id="labelBarFX"
+               text="Bar FX"
+               styleClass="logo-barfx"/>
+
+    </HBox>
+
+    <Label text="|"
+           styleClass="nav-separator"/>
+
+    <Label fx:id="activeTableLabel"
+           text=""
+           visible="false"
+           managed="false"
+           styleClass="active-table-label">
+
+        <HBox.margin>
+            <Insets right="4"/>
+        </HBox.margin>
+
+    </Label>
+
+    <Button fx:id="btnAdministration"
+            text="⚙ Administration"
+            onAction="#handleAdministration"
+            styleClass="nav-link-btn">
+
+        <HBox.margin>
+            <Insets left="4"/>
+        </HBox.margin>
+
+    </Button>
+
+    <Button fx:id="btnDailyBalance"
+            text="⚖ Daily Balance"
+            onAction="#handleDailyBalance"
+            styleClass="nav-link-btn"/>
+
+    <Button fx:id="btnUsers"
+            text="🙍 Users"
+            onAction="#handleUsers"
+            styleClass="nav-link-btn"/>
+
+    <Region HBox.hgrow="ALWAYS"/>
+
+    <Label fx:id="userLabel"
+           styleClass="user-label">
+
+        <HBox.margin>
+            <Insets right="12"/>
+        </HBox.margin>
+
+    </Label>
+
+    <Button fx:id="logoutButton"
+            text="→  Logout"
+            onAction="#handleLogout"
+            styleClass="nav-logout-btn"/>
+
+</HBox>

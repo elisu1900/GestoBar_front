@@ -20,7 +20,7 @@ public class ApiClient {
     private final HttpClient client;
     private final String baseUrl;
 
-    // CookieManager gestiona JSESSIONID automáticamente
+    // CookieManager gestiona JSESSIONID
     private ApiClient() {
         CookieManager cookieManager = new CookieManager();
         cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
@@ -37,9 +37,6 @@ public class ApiClient {
         return instance;
     }
 
-    // --------------------------------------------------------
-    //  GET
-    // --------------------------------------------------------
     public <T> T get(String endpoint, Class<T> responseType) throws ApiException {
         var request = HttpRequest.newBuilder()
                 .uri(uri(endpoint))
@@ -49,9 +46,6 @@ public class ApiClient {
         return send(request, responseType);
     }
 
-    // --------------------------------------------------------
-    //  POST
-    // --------------------------------------------------------
     public <T> T post(String endpoint, Object body, Class<T> responseType) throws ApiException {
         var request = HttpRequest.newBuilder()
                 .uri(uri(endpoint))
@@ -60,8 +54,7 @@ public class ApiClient {
                 .build();
         return send(request, responseType);
     }
-
-    // POST sin body (ej: /logout, /balance/reset)
+    //post sin body
     public void post(String endpoint) throws ApiException {
         var request = HttpRequest.newBuilder()
                 .uri(uri(endpoint))
@@ -71,9 +64,6 @@ public class ApiClient {
         sendRaw(request);
     }
 
-    // --------------------------------------------------------
-    //  PUT
-    // --------------------------------------------------------
     public <T> T put(String endpoint, Object body, Class<T> responseType) throws ApiException {
         var request = HttpRequest.newBuilder()
                 .uri(uri(endpoint))
@@ -82,10 +72,6 @@ public class ApiClient {
                 .build();
         return send(request, responseType);
     }
-
-    // --------------------------------------------------------
-    //  PATCH
-    // --------------------------------------------------------
     public <T> T patch(String endpoint, Object body, Class<T> responseType) throws ApiException {
         var request = HttpRequest.newBuilder()
                 .uri(uri(endpoint))
@@ -94,8 +80,7 @@ public class ApiClient {
                 .build();
         return send(request, responseType);
     }
-
-    // PATCH sin body (ej: /tickets/{id}/close)
+    //patch sin body
     public void patch(String endpoint) throws ApiException {
         var request = HttpRequest.newBuilder()
                 .uri(uri(endpoint))
@@ -105,9 +90,6 @@ public class ApiClient {
         sendRaw(request);
     }
 
-    // --------------------------------------------------------
-    //  DELETE
-    // --------------------------------------------------------
     public void delete(String endpoint) throws ApiException {
         var request = HttpRequest.newBuilder()
                 .uri(uri(endpoint))
@@ -117,9 +99,6 @@ public class ApiClient {
         sendRaw(request);
     }
 
-    // --------------------------------------------------------
-    //  Internos
-    // --------------------------------------------------------
     private <T> T send(HttpRequest request, Class<T> responseType) throws ApiException {
         try {
             var response = client.send(request, HttpResponse.BodyHandlers.ofString());
@@ -144,7 +123,7 @@ public class ApiClient {
             case 401 -> throw new ApiException("No autorizado. Inicia sesión.");
             case 403 -> throw new ApiException("Acceso denegado.");
             case 404 -> throw new ApiException("Recurso no encontrado.");
-            case 204 -> {} // OK sin contenido
+            case 204 -> {}
             default  -> { if (status >= 400) throw new ApiException("Error del servidor: " + status); }
         }
     }

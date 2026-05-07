@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.elias.gestobar.controllers.TablePanelController"
+      stylesheets="@../css/styles.css"
+      styleClass="panel-dark tables-panel"
+      VBox.vgrow="ALWAYS">
+
+    <Label text="Tables"
+           styleClass="section-title"/>
+
+    <ScrollPane fitToWidth="true"
+                hbarPolicy="NEVER"
+                VBox.vgrow="ALWAYS"
+                styleClass="transparent-scroll-paddingless">
+
+        <FlowPane fx:id="tablesContainer"
+                  hgap="6"
+                  vgap="6"
+                  styleClass="transparent-container"/>
+
+    </ScrollPane>
+
+</VBox>

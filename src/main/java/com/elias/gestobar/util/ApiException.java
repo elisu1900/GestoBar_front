@@ -1,5 +1,6 @@
 package com.elias.gestobar.util;
-// utils/ApiException.java
+
+
 public class ApiException extends Exception {
 
     private final int statusCode;

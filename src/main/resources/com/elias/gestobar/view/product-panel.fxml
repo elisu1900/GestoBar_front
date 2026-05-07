@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.elias.gestobar.controllers.ProductPanelController"
+      stylesheets="@../css/styles.css"
+      styleClass="panel-dark panel-section"
+      VBox.vgrow="ALWAYS"
+      HBox.vgrow="ALWAYS">
+
+    <Label text="Products"
+           styleClass="section-title"/>
+
+    <ScrollPane fitToWidth="true"
+                VBox.vgrow="ALWAYS"
+                styleClass="transparent-scroll">
+
+        <FlowPane fx:id="productsContainer"
+                  hgap="10"
+                  vgap="10"
+                  styleClass="products-container"/>
+
+    </ScrollPane>
+
+</VBox>

@@ -19,13 +19,11 @@
            minWidth="900"
            minHeight="520">
 
-    <!-- Card centrada — ancho fijo, altura automática -->
     <VBox fx:id="loginCard"
           maxWidth="320"
           maxHeight="420"
           StackPane.alignment="CENTER">
 
-        <!-- Logo + título -->
         <VBox fx:id="logoSection" alignment="CENTER">
             <ImageView fitWidth="52" fitHeight="52" preserveRatio="true">
                 <image><Image url="@../images/logo.png"/></image>
@@ -37,7 +35,6 @@
             </HBox>
         </VBox>
 
-        <!-- Formulario -->
         <VBox fx:id="formSection">
 
             <Label fx:id="usernameLabel" text="Username"/>

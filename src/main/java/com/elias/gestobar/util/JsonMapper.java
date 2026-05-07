@@ -7,7 +7,6 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.util.List;
 
-// utils/JsonMapper.java
 public class JsonMapper {
 
     private static final ObjectMapper mapper = new ObjectMapper()
@@ -32,7 +31,7 @@ public class JsonMapper {
         }
     }
 
-    // Para listas: JsonMapper.fromJsonList(json, ProductDto.class)
+    // mapper para listas
     public static <T> List<T> fromJsonList(String json, Class<T> clazz) {
         try {
             var type = mapper.getTypeFactory()

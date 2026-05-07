@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox fx:id="contentRoot"
+      xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.elias.gestobar.controllers.ContentAreaController"
+      stylesheets="@../css/styles.css"
+      styleClass="content-root"
+      VBox.vgrow="ALWAYS">
+
+    <VBox styleClass="left-column">
+
+        <fx:include source="table-panel.fxml"/>
+
+        <fx:include source="calculator.fxml"/>
+
+    </VBox>
+
+    <fx:include source="product-panel.fxml"
+                HBox.hgrow="ALWAYS"/>
+
+</HBox>

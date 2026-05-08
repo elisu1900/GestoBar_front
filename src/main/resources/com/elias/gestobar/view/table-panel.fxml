@@ -1,29 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.layout.FlowPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx/21"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.elias.gestobar.controllers.TablePanelController"
-      stylesheets="@../css/styles.css"
-      styleClass="panel-dark tables-panel"
-      VBox.vgrow="ALWAYS">
+<VBox styleClass="panel-dark tables-panel" stylesheets="@../css/styles.css" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.elias.gestobar.controllers.TablePanelController">
 
-    <Label text="Tables"
-           styleClass="section-title"/>
+    <Label styleClass="section-title" text="Tables" />
 
-    <ScrollPane fitToWidth="true"
-                hbarPolicy="NEVER"
-                VBox.vgrow="ALWAYS"
-                styleClass="transparent-scroll-paddingless">
+    <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="transparent-scroll-paddingless" VBox.vgrow="ALWAYS">
 
-        <FlowPane fx:id="tablesContainer"
-                  hgap="6"
-                  vgap="6"
-                  styleClass="transparent-container"/>
+        <FlowPane fx:id="tablesContainer" hgap="6" styleClass="transparent-container" vgap="5" />
+      <VBox.margin>
+         <Insets left="5.0" />
+      </VBox.margin>
 
     </ScrollPane>
 

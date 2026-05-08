@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.layout.*?>
 
-<HBox fx:id="contentRoot"
-      xmlns="http://javafx.com/javafx/21"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.elias.gestobar.controllers.ContentAreaController"
-      stylesheets="@../css/styles.css"
-      styleClass="content-root"
-      VBox.vgrow="ALWAYS">
+<HBox fx:id="contentRoot" styleClass="content-root" stylesheets="@../css/styles.css" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.elias.gestobar.controllers.ContentAreaController">
 
     <VBox styleClass="left-column">
-        <fx:include fx:id="tablePanel" source="table-panel.fxml"/>
-        <fx:include fx:id="calculator" source="calculator.fxml"/>
+        <fx:include fx:id="tablePanel" source="table-panel.fxml" />
+        <fx:include fx:id="calculator" source="calculator.fxml" />
+      <padding>
+         <Insets left="10.0" />
+      </padding>
     </VBox>
-    <fx:include fx:id="productPanel" source="product-panel.fxml" HBox.hgrow="ALWAYS"/>
+    <fx:include fx:id="productPanel" source="product-panel.fxml" HBox.hgrow="ALWAYS" />
 </HBox>

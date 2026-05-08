@@ -58,6 +58,7 @@ public class LoginController {
 
         task.setOnFailed(e -> {
             Throwable ex = task.getException();
+            ex.printStackTrace();
             showError(ex instanceof ApiException
                     ? ex.getMessage()
                     : "Error de conexión con el servidor.");

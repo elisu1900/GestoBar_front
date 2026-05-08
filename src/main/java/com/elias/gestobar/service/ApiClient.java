@@ -58,6 +58,7 @@ public class ApiClient {
             handleStatus(response.statusCode());
             return response.body();
         } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
             throw new ApiException("No se pudo conectar con el servidor");
         }
     }

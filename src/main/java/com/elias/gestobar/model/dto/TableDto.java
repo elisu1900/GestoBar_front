@@ -1,8 +1,10 @@
 package com.elias.gestobar.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public record TableDto(
-        Integer tableId,
-        Integer number,
-        Integer capacity,
-        Boolean isActive
+        @JsonProperty("tableId")   Integer tableId,
+        @JsonProperty("number")    Integer number,
+        @JsonProperty("capacity")  Integer capacity,
+        @JsonProperty("isActive")  Boolean isActive
 ) {}

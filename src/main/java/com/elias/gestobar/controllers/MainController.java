@@ -13,12 +13,14 @@ public class MainController {
 
     @FXML
     public void initialize() {
-        contentAreaController.getTablePanelController()
-                .setOrderPanelController(orderPanelController);
-        contentAreaController.getTablePanelController()
-                .setNavbarController(navbarController);
+        TablePanelController   tablePanelController   = contentAreaController.getTablePanelController();
+        ProductPanelController productPanelController = contentAreaController.getProductPanelController();
 
-        contentAreaController.getProductPanelController()
-                .setOrderPanelController(orderPanelController);
+        tablePanelController.setOrderPanelController(orderPanelController);
+        tablePanelController.setNavbarController(navbarController);
+
+        tablePanelController.setProductPanelController(productPanelController);
+
+        productPanelController.setOrderPanelController(orderPanelController);
     }
 }

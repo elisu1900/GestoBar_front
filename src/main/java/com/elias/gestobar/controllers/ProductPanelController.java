@@ -121,9 +121,10 @@ public class ProductPanelController {
             activeTicketId = newTicket.ticketId().longValue();
             SessionManager.getInstance().setActiveTicketId(activeTicketId);
         }
-
         ticketService.addProduct(activeTicketId.intValue(), product.productId(), 1);
-
         return ticketService.getTicket(activeTicketId.intValue());
+    }
+    public void setActiveTicketId(Integer ticketId) {
+        this.activeTicketId = ticketId != null ? ticketId.longValue() : null;
     }
 }

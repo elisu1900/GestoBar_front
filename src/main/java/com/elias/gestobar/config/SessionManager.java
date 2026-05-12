@@ -7,9 +7,9 @@ public class SessionManager {
 
     private static SessionManager instance;
 
-    private Long    userId;
-    private String  nombre;
-    private String  apellido;
+    private Integer    userId;
+    private String  name;
+    private String lastName;
     private Role    role;
     private boolean active;
 
@@ -24,28 +24,28 @@ public class SessionManager {
 
     public void login(UserSessionDto user) {
         this.userId   = user.id();
-        this.nombre   = user.nombre();
-        this.apellido = user.apellido();
+        this.name   = user.name();
+        this.lastName = user.lastName();
         this.role     = user.role();
         this.active   = user.active();
     }
 
     public void clear() {
         this.userId        = null;
-        this.nombre        = null;
-        this.apellido      = null;
+        this.name          = null;
+        this.lastName      = null;
         this.role          = null;
-        this.activeTicketId = null;
+        this.activeTicketId= null;
     }
 
     public boolean isLoggedIn() { return userId != null; }
     public boolean isAdmin()    { return role == Role.ADMIN; }
     public boolean isWaiter()   { return role == Role.WAITER; }
 
-    public Long   getUserId()   { return userId; }
-    public String getNombre()   { return nombre; }
-    public String getApellido() { return apellido; }
-    public String getFullName() { return nombre + " " + apellido; }
+    public Integer   getUserId()   { return userId; }
+    public String getNombre()   { return name; }
+    public String getLastName() { return lastName; }
+    public String getFullName() { return name + " " + lastName; }
     public Role   getRole()     { return role; }
     public boolean isActive()   { return active; }
 

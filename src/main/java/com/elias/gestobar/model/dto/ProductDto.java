@@ -8,6 +8,7 @@ public record ProductDto(
         @JsonProperty("categoryId")    Integer categoryId,
         @JsonProperty("categoryName")  String categoryName,
         @JsonProperty("name")          String name,
+        @JsonProperty("costPrice")     BigDecimal costPrice,
         @JsonProperty("sellPrice")     BigDecimal sellPrice,
         @JsonProperty("isActive")      Boolean isActive
 ) {}

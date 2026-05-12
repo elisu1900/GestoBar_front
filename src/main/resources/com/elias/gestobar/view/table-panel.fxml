@@ -12,7 +12,7 @@
 
         <FlowPane fx:id="tablesContainer" hgap="6" styleClass="transparent-container" vgap="5" />
       <VBox.margin>
-         <Insets left="5.0" />
+         <Insets />
       </VBox.margin>
 
     </ScrollPane>

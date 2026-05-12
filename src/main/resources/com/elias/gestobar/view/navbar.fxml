@@ -42,6 +42,17 @@
 
     </Label>
 
+    <Button fx:id="btnMain"
+            text=" 🪑 Main"
+            onAction="#handleMain"
+            styleClass="nav-link-btn">
+
+        <HBox.margin>
+            <Insets left="4"/>
+        </HBox.margin>
+
+    </Button>
+
     <Button fx:id="btnAdministration"
             text="⚙ Administration"
             onAction="#handleAdministration"

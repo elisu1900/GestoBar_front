@@ -4,6 +4,7 @@ import com.elias.gestobar.config.SessionManager;
 import com.elias.gestobar.model.dto.TableDto;
 import com.elias.gestobar.service.AuthService;
 import com.elias.gestobar.util.ApiException;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -63,5 +64,9 @@ public class NavbarController {
             authService.logout();
         } catch (ApiException ignored) {}
         Router.goToLogin();
+    }
+
+    public void handleMain() {
+        Router.goTo("main");
     }
 }

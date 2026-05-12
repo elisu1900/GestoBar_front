@@ -73,4 +73,8 @@ public class AppConfig {
         String val = props.getProperty(key);
         return val != null ? Boolean.parseBoolean(val.trim()) : def;
     }
+    // Ticket abierto por mesa
+    public static String getOpenTicketByTableEndpoint(Integer tableId) {
+        return get("api.endpoint.tickets") + "/table/" + tableId + "/open";
+    }
 }

@@ -49,4 +49,14 @@ public class TicketApiService {
     public void closeTicket(Integer ticketId) throws ApiException {
         api.patch(AppConfig.getTicketsEndpoint() + "/" + ticketId + "/close");
     }
+
+    // GET /api/tickets/table/{tableId}/open
+    public TicketDto findOpenTicketByTable(Integer tableId) throws ApiException {
+        try {
+            return api.get(AppConfig.getTicketsEndpoint() + "/table/" + tableId + "/open", TicketDto.class);
+        } catch (ApiException e) {
+            if (e.isNotFound()) return null;
+            throw e;
+        }
+    }
 }

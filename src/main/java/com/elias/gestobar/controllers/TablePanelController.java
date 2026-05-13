@@ -102,6 +102,7 @@ public class TablePanelController {
         Task<TicketDto> task = new Task<TicketDto>() {
             @Override
             protected TicketDto call() throws Exception {
+                // Siempre preguntar al backend, nunca fiarse del estado local
                 return ticketService.findOpenTicketByTable(table.tableId());
             }
         };
@@ -115,6 +116,7 @@ public class TablePanelController {
                 if (orderPanelController != null)
                     orderPanelController.renderTicket(ticket);
             } else {
+                // Mesa sin ticket abierto — limpiar todo
                 SessionManager.getInstance().clearActiveTicketId();
                 if (productPanelController != null)
                     productPanelController.setActiveTicketId(null);
@@ -125,7 +127,10 @@ public class TablePanelController {
 
         task.setOnFailed(e -> {
             SessionManager.getInstance().clearActiveTicketId();
-            if (orderPanelController != null) orderPanelController.clearOrder();
+            if (productPanelController != null)
+                productPanelController.setActiveTicketId(null);
+            if (orderPanelController != null)
+                orderPanelController.clearOrder();
         });
 
         new Thread(task).start();

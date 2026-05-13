@@ -22,5 +22,8 @@ public class MainController {
         tablePanelController.setProductPanelController(productPanelController);
 
         productPanelController.setOrderPanelController(orderPanelController);
+
+        orderPanelController.setProductPanelController(productPanelController);
+        orderPanelController.setTablePanelController(tablePanelController);
     }
 }

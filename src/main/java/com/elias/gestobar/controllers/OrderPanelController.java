@@ -162,5 +162,7 @@ public class OrderPanelController {
         if (tablePanelController != null)  tablePanelController.clearSelection();
         if (navbarController != null)      navbarController.clearActiveTable();
         if (productPanelController != null) productPanelController.clearTable();
+        productPanelController.setActiveTicketId(null);
+
     }
 }

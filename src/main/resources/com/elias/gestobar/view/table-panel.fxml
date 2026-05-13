@@ -4,16 +4,18 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox styleClass="panel-dark tables-panel" stylesheets="@../css/styles.css" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.elias.gestobar.controllers.TablePanelController">
+<VBox styleClass="panel-dark tables-panel" stylesheets="@../css/styles.css" VBox.vgrow="ALWAYS"
+      xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.elias.gestobar.controllers.TablePanelController">
 
-    <Label styleClass="section-title" text="Tables" />
+    <Label styleClass="section-title" text="Tables"/>
 
     <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="transparent-scroll-paddingless" VBox.vgrow="ALWAYS">
 
-        <FlowPane fx:id="tablesContainer" hgap="6" styleClass="transparent-container" vgap="5" />
-      <VBox.margin>
-         <Insets />
-      </VBox.margin>
+        <FlowPane fx:id="tablesContainer" hgap="6" styleClass="transparent-container" vgap="5"/>
+        <VBox.margin>
+            <Insets/>
+        </VBox.margin>
 
     </ScrollPane>
 

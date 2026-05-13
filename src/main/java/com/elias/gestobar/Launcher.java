@@ -3,8 +3,6 @@ package com.elias.gestobar;
 import com.elias.gestobar.config.AppConfig;
 import com.elias.gestobar.controllers.Router;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Launcher extends Application {
@@ -19,7 +17,7 @@ public class Launcher extends Application {
         stage.setMaximized(AppConfig.isMaximized());
         stage.setResizable(true);
 
-        Router.goTo("splash");
+        Router.goToSplash();
         stage.show();
     }
 

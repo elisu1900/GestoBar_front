@@ -45,17 +45,17 @@ public class NavbarController {
 
     @FXML
     private void handleAdministration() {
-        Router.goTo("administration");
+        Router.goToAdmin();
     }
 
     @FXML
     private void handleDailyBalance() {
-        Router.goTo("daily-balance");
+        Router.goToDailyBalance();
     }
 
     @FXML
     private void handleUsers() {
-        Router.goTo("users");
+        Router.goToUsers();
     }
 
     @FXML
@@ -67,6 +67,6 @@ public class NavbarController {
     }
 
     public void handleMain() {
-        Router.goTo("main");
+        Router.goToMain();
     }
 }

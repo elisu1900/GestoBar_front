@@ -74,7 +74,6 @@ public class TablePanelController {
     }
 
     private void handleTableClick(TableDto table, Button btn) {
-        // Deseleccionar anterior
         if (selectedButton != null) {
             selectedButton.getStyleClass().remove("table-btn-selected");
             if (!selectedButton.getStyleClass().contains("table-btn")) {
@@ -93,7 +92,6 @@ public class TablePanelController {
         if (orderPanelController != null)
             orderPanelController.onTableSelected(table);
 
-        // ← esto faltaba: notificar al panel de productos
         if (productPanelController != null)
             productPanelController.onTableSelected(table);
 
@@ -104,7 +102,6 @@ public class TablePanelController {
         Task<TicketDto> task = new Task<TicketDto>() {
             @Override
             protected TicketDto call() throws Exception {
-                // Preguntar al backend si la mesa tiene ticket abierto
                 return ticketService.findOpenTicketByTable(table.tableId());
             }
         };
@@ -112,14 +109,12 @@ public class TablePanelController {
         task.setOnSucceeded(e -> {
             TicketDto ticket = task.getValue();
             if (ticket != null) {
-                // Mesa tiene ticket abierto — cargarlo
                 SessionManager.getInstance().setActiveTicketId((long) ticket.ticketId());
                 if (productPanelController != null)
                     productPanelController.setActiveTicketId(ticket.ticketId());
                 if (orderPanelController != null)
                     orderPanelController.renderTicket(ticket);
             } else {
-                // Mesa libre — limpiar estado
                 SessionManager.getInstance().clearActiveTicketId();
                 if (productPanelController != null)
                     productPanelController.setActiveTicketId(null);

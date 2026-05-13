@@ -26,7 +26,9 @@
 
         <VBox fx:id="logoSection" alignment="CENTER">
             <ImageView fitWidth="52" fitHeight="52" preserveRatio="true">
-                <image><Image url="@../images/logo.png"/></image>
+                <image>
+                    <Image url="@../images/logo.png"/>
+                </image>
             </ImageView>
 
             <HBox alignment="CENTER" spacing="0">

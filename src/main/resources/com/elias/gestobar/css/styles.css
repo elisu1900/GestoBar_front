@@ -1066,3 +1066,135 @@
     -fx-font-size: 11px;
     -fx-font-family: "Segoe UI";
 }
+
+/* =============================================
+   20. DAILY BALANCE
+   ============================================= */
+
+.balance-confirm-box {
+    -fx-background-color: #FEF2F2;
+    -fx-border-color: #FECACA;
+    -fx-border-width: 1px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 12 16 12 16;
+}
+
+.balance-confirm-text {
+    -fx-text-fill: #991B1B;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+}
+
+.balance-stat-card {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 8px;
+    -fx-border-color: #E5E7EB;
+    -fx-border-width: 1px;
+    -fx-border-radius: 8px;
+    -fx-padding: 16;
+    -fx-spacing: 8;
+}
+
+.balance-stat-label {
+    -fx-text-fill: #6B7280;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 12px;
+}
+
+.balance-stat-icon-blue {
+    -fx-text-fill: #5B9BD5;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.balance-stat-icon-green {
+    -fx-text-fill: #22C55E;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.balance-stat-icon {
+    -fx-font-size: 14px;
+}
+
+.balance-stat-value-blue {
+    -fx-text-fill: #5B9BD5;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+.balance-stat-value-red {
+    -fx-text-fill: #EF4444;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+.balance-stat-value-green {
+    -fx-text-fill: #22C55E;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+.balance-breakdown-title {
+    -fx-text-fill: #1F2937;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.balance-separator .line {
+    -fx-border-color: #E5E7EB;
+    -fx-border-width: 1 0 0 0;
+}
+
+.balance-cost-value {
+    -fx-text-fill: #EF4444;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+}
+
+.balance-profit-value {
+    -fx-text-fill: #22C55E;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+}
+
+.balance-totals-row {
+    -fx-background-color: #F9FAFB;
+    -fx-padding: 10 16 10 16;
+    -fx-border-color: #E5E7EB transparent transparent transparent;
+    -fx-border-width: 1 0 0 0;
+    -fx-alignment: CENTER_LEFT;
+}
+
+.balance-totals-label {
+    -fx-text-fill: #1F2937;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+.balance-totals-value-blue {
+    -fx-text-fill: #5B9BD5;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+.balance-totals-value-red {
+    -fx-text-fill: #EF4444;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+.balance-totals-value-green {
+    -fx-text-fill: #22C55E;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}

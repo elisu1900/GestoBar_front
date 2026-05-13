@@ -20,7 +20,7 @@
     <VBox alignment="CENTER" spacing="18">
 
         <StackPane fx:id="iconContainer" prefWidth="80" prefHeight="80">
-            <Rectangle width="80" height="80" arcWidth="18" arcHeight="18" />
+            <Rectangle width="80" height="80" arcWidth="18" arcHeight="18"/>
             <ImageView fx:id="logoImage"
                        fitWidth="48"
                        fitHeight="48"
@@ -31,13 +31,13 @@
         </StackPane>
 
         <HBox alignment="CENTER">
-            <Label fx:id="labelGesto" text="Gesto" />
-            <Label fx:id="labelBarFX" text="Bar FX" />
+            <Label fx:id="labelGesto" text="Gesto"/>
+            <Label fx:id="labelBarFX" text="Bar FX"/>
         </HBox>
 
         <VBox alignment="CENTER" spacing="6">
-            <ProgressIndicator fx:id="loadingSpinner" />
-            <Label fx:id="loadingLabel" text="Loading..." />
+            <ProgressIndicator fx:id="loadingSpinner"/>
+            <Label fx:id="loadingLabel" text="Loading..."/>
         </VBox>
 
     </VBox>

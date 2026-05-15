@@ -15,17 +15,18 @@ import java.util.List;
 
 public class TablePanelController {
 
-    @FXML private FlowPane tablesContainer;
+    @FXML
+    private FlowPane tablesContainer;
 
-    private final TableApiService  tableService  = new TableApiService();
+    private final TableApiService tableService = new TableApiService();
     private final TicketApiService ticketService = new TicketApiService();
 
-    private OrderPanelController   orderPanelController;
-    private NavbarController       navbarController;
+    private OrderPanelController orderPanelController;
+    private NavbarController navbarController;
     private ProductPanelController productPanelController;
 
-    private Button   selectedButton = null;
-    private TableDto selectedTable  = null;
+    private Button selectedButton = null;
+    private TableDto selectedTable = null;
 
     @FXML
     public void initialize() {
@@ -82,7 +83,7 @@ public class TablePanelController {
         }
 
         selectedButton = btn;
-        selectedTable  = table;
+        selectedTable = table;
         btn.getStyleClass().remove("table-btn");
         btn.getStyleClass().add("table-btn-selected");
 
@@ -102,7 +103,6 @@ public class TablePanelController {
         Task<TicketDto> task = new Task<TicketDto>() {
             @Override
             protected TicketDto call() throws Exception {
-                // Siempre preguntar al backend, nunca fiarse del estado local
                 return ticketService.findOpenTicketByTable(table.tableId());
             }
         };
@@ -116,12 +116,11 @@ public class TablePanelController {
                 if (orderPanelController != null)
                     orderPanelController.renderTicket(ticket);
             } else {
-                // Mesa sin ticket abierto — limpiar todo
                 SessionManager.getInstance().clearActiveTicketId();
                 if (productPanelController != null)
                     productPanelController.setActiveTicketId(null);
                 if (orderPanelController != null)
-                    orderPanelController.clearOrder();
+                    orderPanelController.clearOrderKeepTitle();
             }
         });
 
@@ -130,7 +129,7 @@ public class TablePanelController {
             if (productPanelController != null)
                 productPanelController.setActiveTicketId(null);
             if (orderPanelController != null)
-                orderPanelController.clearOrder();
+                orderPanelController.clearOrderKeepTitle();
         });
 
         new Thread(task).start();
@@ -147,6 +146,11 @@ public class TablePanelController {
         selectedTable = null;
     }
 
-    public TableDto getSelectedTable() { return selectedTable; }
-    public void refresh()              { loadTables(); }
+    public TableDto getSelectedTable() {
+        return selectedTable;
+    }
+
+    public void refresh() {
+        loadTables();
+    }
 }

@@ -6,6 +6,7 @@ import com.elias.gestobar.model.dto.TicketDetailDto;
 import com.elias.gestobar.model.dto.TicketDto;
 import com.elias.gestobar.service.TicketApiService;
 import com.elias.gestobar.util.AlertHelper;
+import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -24,8 +25,8 @@ public class OrderPanelController {
 
     private final TicketApiService ticketService = new TicketApiService();
 
-    private TablePanelController  tablePanelController;
-    private NavbarController      navbarController;
+    private TablePanelController   tablePanelController;
+    private NavbarController       navbarController;
     private ProductPanelController productPanelController;
 
     private TicketDto currentTicket;
@@ -42,36 +43,49 @@ public class OrderPanelController {
         this.productPanelController = controller;
     }
 
-
     public void onTableSelected(TableDto table) {
-        orderTitle.setText("Table " + table.number() + " — Order");
+        Platform.runLater(() ->
+                orderTitle.setText("Table " + table.number() + " — Order")
+        );
     }
 
-
     public void renderTicket(TicketDto ticket) {
-        currentTicket = ticket;
-        orderItemsContainer.getChildren().clear();
+        Platform.runLater(() -> {
+            currentTicket = ticket;
+            orderItemsContainer.getChildren().clear();
 
-        if (ticket == null || ticket.details() == null || ticket.details().isEmpty()) {
-            totalLabel.setText("0.00 €");
-            closeBillButton.setDisable(true);
-            return;
-        }
+            if (ticket == null || ticket.details() == null || ticket.details().isEmpty()) {
+                totalLabel.setText("0.00 €");
+                closeBillButton.setDisable(true);
+                return;
+            }
 
-        for (TicketDetailDto item : ticket.details()) {
-            orderItemsContainer.getChildren().add(createOrderItem(item));
-        }
+            for (TicketDetailDto item : ticket.details()) {
+                orderItemsContainer.getChildren().add(createOrderItem(item));
+            }
 
-        totalLabel.setText(String.format("%.2f €", ticket.total()));
-        closeBillButton.setDisable(false);
+            totalLabel.setText(String.format("%.2f €", ticket.total()));
+            closeBillButton.setDisable(false);
+        });
     }
 
     public void clearOrder() {
-        currentTicket = null;
-        orderItemsContainer.getChildren().clear();
-        orderTitle.setText("No table selected");
-        totalLabel.setText("0.00 €");
-        closeBillButton.setDisable(true);
+        Platform.runLater(() -> {
+            currentTicket = null;
+            orderItemsContainer.getChildren().clear();
+            orderTitle.setText("No table selected");
+            totalLabel.setText("0.00 €");
+            closeBillButton.setDisable(true);
+        });
+    }
+
+    public void clearOrderKeepTitle() {
+        Platform.runLater(() -> {
+            currentTicket = null;
+            orderItemsContainer.getChildren().clear();
+            totalLabel.setText("0.00 €");
+            closeBillButton.setDisable(true);
+        });
     }
 
     private HBox createOrderItem(TicketDetailDto item) {
@@ -159,10 +173,11 @@ public class OrderPanelController {
         SessionManager.getInstance().clearActiveTicketId();
         clearOrder();
 
-        if (tablePanelController != null)  tablePanelController.clearSelection();
-        if (navbarController != null)      navbarController.clearActiveTable();
-        if (productPanelController != null) productPanelController.clearTable();
-        productPanelController.setActiveTicketId(null);
-
+        if (tablePanelController  != null) tablePanelController.clearSelection();
+        if (navbarController      != null) navbarController.clearActiveTable();
+        if (productPanelController != null) {
+            productPanelController.clearTable();
+            productPanelController.setActiveTicketId(null);
+        }
     }
 }

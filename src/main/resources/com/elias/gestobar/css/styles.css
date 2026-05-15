@@ -521,8 +521,8 @@
 
 .order-panel {
     -fx-background-color: #1E2A3A;
-    -fx-pref-width: 280px;
-    -fx-min-width: 260px;
+    -fx-pref-width: 320px;
+    -fx-min-width: 300px;
     -fx-padding: 16;
     -fx-spacing: 10;
     -fx-border-color: #2D3F55;

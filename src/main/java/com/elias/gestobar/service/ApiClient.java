@@ -55,10 +55,9 @@ public class ApiClient {
                 .build();
         try {
             var response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            handleStatus(response.statusCode());
+            handleStatus(response.statusCode(), response.body());
             return response.body();
         } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
             throw new ApiException("No se pudo conectar con el servidor");
         }
     }
@@ -126,7 +125,7 @@ public class ApiClient {
     private <T> T send(HttpRequest request, Class<T> responseType) throws ApiException {
         try {
             var response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            handleStatus(response.statusCode());
+            handleStatus(response.statusCode(), response.body());
             return JsonMapper.fromJson(response.body(), responseType);
         } catch (IOException | InterruptedException e) {
             throw new ApiException("No se pudo conectar con el servidor");
@@ -136,20 +135,33 @@ public class ApiClient {
     private void sendRaw(HttpRequest request) throws ApiException {
         try {
             var response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            handleStatus(response.statusCode());
+            handleStatus(response.statusCode(), response.body());
         } catch (IOException | InterruptedException e) {
             throw new ApiException("No se pudo conectar con el servidor");
         }
     }
 
-    private void handleStatus(int status) throws ApiException {
+    private void handleStatus(int status, String body) throws ApiException {
         switch (status) {
-            case 401 -> throw new ApiException("No autorizado. Inicia sesión.");
-            case 403 -> throw new ApiException("Acceso denegado.");
-            case 404 -> throw new ApiException("Recurso no encontrado.");
+            case 400 -> throw new ApiException(parseErrorMessage(body, "Datos incorrectos."), 400);
+            case 401 -> throw new ApiException("No autorizado. Inicia sesión.", 401);
+            case 403 -> throw new ApiException("Acceso denegado.", 403);
+            case 404 -> throw new ApiException("Recurso no encontrado.", 404);
+            case 409 -> throw new ApiException(parseErrorMessage(body, "El recurso ya existe."), 409);
             case 204 -> {}
-            default  -> { if (status >= 400) throw new ApiException("Error del servidor: " + status); }
+            default  -> { if (status >= 400) throw new ApiException(
+                    parseErrorMessage(body, "Error del servidor: " + status), status); }
         }
+    }
+
+    private String parseErrorMessage(String body, String fallback) {
+        try {
+            // El backend devuelve {"error": "mensaje", ...}
+            var node = new com.fasterxml.jackson.databind.ObjectMapper().readTree(body);
+            if (node.has("error")) return node.get("error").asText();
+            if (node.has("message")) return node.get("message").asText();
+        } catch (Exception ignored) {}
+        return fallback;
     }
 
     private URI uri(String endpoint) {

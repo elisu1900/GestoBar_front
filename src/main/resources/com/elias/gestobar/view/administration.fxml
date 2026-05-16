@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.BorderPane?>
 
 <BorderPane xmlns="http://javafx.com/javafx/21"
@@ -14,7 +16,18 @@
     </top>
 
     <center>
-        <fx:include fx:id="adminContent" source="content-admin.fxml"/>
+        <TabPane styleClass="admin-tab-pane" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+            <Tab text="Productos">
+                <content>
+                    <fx:include source="content-admin.fxml"/>
+                </content>
+            </Tab>
+            <Tab text="Mesas">
+                <content>
+                    <fx:include source="content-admin-tables.fxml"/>
+                </content>
+            </Tab>
+        </TabPane>
     </center>
 
 </BorderPane>

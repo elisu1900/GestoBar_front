@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.elias.gestobar.controllers.ContentAdminTablesController"
+      styleClass="admin-root">
+
+    <HBox alignment="CENTER_LEFT">
+        <Label text="Gestión de Mesas" styleClass="admin-title"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="+ Añadir Mesa"
+                onAction="#handleAddTable"
+                styleClass="btn-primary"/>
+    </HBox>
+
+    <VBox fx:id="newTableForm"
+          visible="false"
+          managed="false"
+          styleClass="admin-card">
+
+        <Label text="Nueva Mesa" styleClass="section-title"/>
+
+        <HBox spacing="12" alignment="CENTER_LEFT">
+            <VBox spacing="4" prefWidth="160">
+                <Label text="Número de Mesa" styleClass="field-label"/>
+                <TextField fx:id="newNumber"
+                           promptText="Ej: 5"
+                           styleClass="input-field"/>
+            </VBox>
+            <VBox spacing="4" prefWidth="160">
+                <Label text="Capacidad (personas)" styleClass="field-label"/>
+                <TextField fx:id="newCapacity"
+                           promptText="Ej: 4"
+                           styleClass="input-field"/>
+            </VBox>
+            <HBox spacing="6" alignment="BOTTOM_CENTER">
+                <Button text="✓" onAction="#handleConfirmNew" styleClass="btn-confirm-sm"/>
+                <Button text="✕" onAction="#handleCancelNew" styleClass="btn-cancel-sm"/>
+            </HBox>
+        </HBox>
+
+        <Label fx:id="newErrorLabel"
+               text=""
+               visible="false"
+               managed="false"
+               styleClass="inline-error"/>
+    </VBox>
+
+    <VBox VBox.vgrow="ALWAYS" styleClass="admin-table-container">
+
+        <HBox styleClass="admin-table-header">
+            <Label text="Mesa" styleClass="col-header" prefWidth="200"/>
+            <Label text="Capacidad" styleClass="col-header" prefWidth="200"/>
+            <Label text="Acciones" styleClass="col-header"/>
+        </HBox>
+
+        <ScrollPane fitToWidth="true"
+                    VBox.vgrow="ALWAYS"
+                    styleClass="transparent-scroll">
+            <VBox fx:id="tableListContainer"
+                  styleClass="transparent-container"/>
+        </ScrollPane>
+
+    </VBox>
+
+</VBox>

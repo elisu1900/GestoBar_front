@@ -1198,3 +1198,52 @@
     -fx-font-size: 13px;
     -fx-font-weight: bold;
 }
+
+
+/* =============================================
+   21. ADMIN TAB PANE
+   ============================================= */
+
+.admin-tab-pane {
+    -fx-background-color: #F1F3F5;
+}
+
+.admin-tab-pane > .tab-header-area {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: transparent transparent #E5E7EB transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 0 0 0 48;
+}
+
+.admin-tab-pane > .tab-header-area > .tab-header-background {
+    -fx-background-color: #FFFFFF;
+}
+
+.admin-tab-pane > .tab-header-area > .headers-region > .tab {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+    -fx-padding: 10 24 10 24;
+    -fx-border-width: 0 0 2 0;
+    -fx-border-color: transparent;
+    -fx-cursor: hand;
+}
+
+.admin-tab-pane > .tab-header-area > .headers-region > .tab:selected {
+    -fx-border-color: transparent transparent #5B9BD5 transparent;
+}
+
+.admin-tab-pane > .tab-header-area > .headers-region > .tab .tab-label {
+    -fx-text-fill: #6B7280;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+.admin-tab-pane > .tab-header-area > .headers-region > .tab:selected .tab-label {
+    -fx-text-fill: #1F2937;
+}
+
+.admin-tab-pane > .tab-content-area {
+    -fx-background-color: #F1F3F5;
+    -fx-padding: 0;
+}

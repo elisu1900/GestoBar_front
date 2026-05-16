@@ -1,112 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx/21"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.elias.gestobar.controllers.BalanceContentController"
-      styleClass="admin-root">
+<VBox styleClass="admin-root" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.elias.gestobar.controllers.BalanceContentController">
 
     <HBox alignment="CENTER_LEFT">
-        <Label text="Daily Closing &amp; Balance" styleClass="admin-title"/>
-        <Region HBox.hgrow="ALWAYS"/>
-        <Button fx:id="btnResetDay"
-                text="⟳  Reset Day"
-                onAction="#handleResetDay"
-                styleClass="btn-danger"/>
+        <Label styleClass="admin-title" text="Daily Closing &amp; Balance" />
+        <Region HBox.hgrow="ALWAYS" />
+        <Button fx:id="btnResetDay" onAction="#handleResetDay" styleClass="btn-danger" text="⟳  Reset Day" />
     </HBox>
 
-    <HBox fx:id="confirmBox"
-          visible="false"
-          managed="false"
-          alignment="CENTER_LEFT"
-          spacing="12"
-          styleClass="balance-confirm-box">
-        <Label text="Are you sure you want to clear all daily sales data?"
-               styleClass="balance-confirm-text"/>
-        <Region HBox.hgrow="ALWAYS"/>
-        <Button text="Yes, Clear" onAction="#handleConfirmReset" styleClass="btn-danger"/>
-        <Button text="Cancel" onAction="#handleCancelReset" styleClass="btn-secondary"/>
+    <HBox fx:id="confirmBox" alignment="CENTER_LEFT" managed="false" spacing="12" styleClass="balance-confirm-box" visible="false">
+        <Label styleClass="balance-confirm-text" text="Are you sure you want to clear all daily sales data?" />
+        <Region HBox.hgrow="ALWAYS" />
+        <Button onAction="#handleConfirmReset" styleClass="btn-danger" text="Yes, Clear" />
+        <Button onAction="#handleCancelReset" styleClass="btn-secondary" text="Cancel" />
     </HBox>
 
     <HBox spacing="16">
 
         <VBox styleClass="balance-stat-card" HBox.hgrow="ALWAYS">
             <HBox alignment="CENTER_LEFT" spacing="6">
-                <Label text="€" styleClass="balance-stat-icon-blue"/>
-                <Label text="Total Revenue" styleClass="balance-stat-label"/>
+                <Label styleClass="balance-stat-icon-blue" text="€" />
+                <Label styleClass="balance-stat-label" text="Product Revenue" />
             </HBox>
-            <Label fx:id="totalRevenueLabel" text="0.00 €" styleClass="balance-stat-value-blue"/>
+            <Label fx:id="totalRevenueLabel" styleClass="balance-stat-value-blue" text="0.00 €" />
         </VBox>
 
         <VBox styleClass="balance-stat-card" HBox.hgrow="ALWAYS">
             <HBox alignment="CENTER_LEFT" spacing="6">
-                <Label text="📊" styleClass="balance-stat-icon"/>
-                <Label text="Total Costs" styleClass="balance-stat-label"/>
+                <Label styleClass="balance-stat-icon" text="📊" />
+                <Label styleClass="balance-stat-label" text="products Costs" />
             </HBox>
-            <Label fx:id="totalCostsLabel" text="0.00 €" styleClass="balance-stat-value-red"/>
+            <Label fx:id="totalCostsLabel" styleClass="balance-stat-value-red" text="0.00 €" />
         </VBox>
 
         <VBox styleClass="balance-stat-card" HBox.hgrow="ALWAYS">
             <HBox alignment="CENTER_LEFT" spacing="6">
-                <Label text="↗" styleClass="balance-stat-icon-green"/>
-                <Label text="Real Profit" styleClass="balance-stat-label"/>
+                <Label styleClass="balance-stat-icon-green" text="↗" />
+                <Label styleClass="balance-stat-label" text="product benefits" />
             </HBox>
-            <Label fx:id="realProfitLabel" text="0.00 €" styleClass="balance-stat-value-green"/>
+            <Label fx:id="realProfitLabel" styleClass="balance-stat-value-green" text="0.00 €" />
         </VBox>
 
     </HBox>
 
-    <VBox VBox.vgrow="ALWAYS" styleClass="admin-table-container">
+    <VBox styleClass="admin-table-container" VBox.vgrow="ALWAYS">
 
-        <Label text="Sales Breakdown" styleClass="balance-breakdown-title">
+        <Label styleClass="balance-breakdown-title" text="Sales Breakdown">
             <VBox.margin>
-                <Insets top="14" right="16" bottom="10" left="16"/>
+                <Insets bottom="10" left="16" right="16" top="14" />
             </VBox.margin>
         </Label>
 
-        <Separator/>
+        <Separator />
 
         <HBox styleClass="admin-table-header">
-            <Label text="Product" styleClass="col-header" prefWidth="280"/>
-            <Label text="Qty Sold" styleClass="col-header" prefWidth="100"/>
-            <Label text="Revenue" styleClass="col-header" prefWidth="120"/>
-            <Label text="Cost" styleClass="col-header" prefWidth="120"/>
-            <Label text="Profit" styleClass="col-header" prefWidth="120"/>
+            <Label prefWidth="280" styleClass="col-header" text="Product" />
+            <Label prefWidth="100" styleClass="col-header" text="Qty Sold" />
+            <Label prefWidth="120" styleClass="col-header" text="Revenue" />
+            <Label prefWidth="120" styleClass="col-header" text="Cost" />
+            <Label prefWidth="120" styleClass="col-header" text="Profit" />
         </HBox>
 
-        <ScrollPane fitToWidth="true"
-                    VBox.vgrow="ALWAYS"
-                    styleClass="transparent-scroll">
-            <VBox fx:id="breakdownContainer"
-                  styleClass="transparent-container"/>
+        <ScrollPane fitToWidth="true" styleClass="transparent-scroll" VBox.vgrow="ALWAYS">
+            <VBox fx:id="breakdownContainer" styleClass="transparent-container" />
         </ScrollPane>
 
-        <HBox fx:id="totalsRow"
-              visible="false"
-              managed="false"
-              styleClass="balance-totals-row">
-            <Label text="Totals"
-                   styleClass="balance-totals-label" prefWidth="280"/>
-            <Label fx:id="totalQtyLabel"
-                   text="0"
-                   styleClass="balance-totals-label" prefWidth="100"/>
-            <Label fx:id="totalRevLabel"
-                   text="0.00 €"
-                   styleClass="balance-totals-value-blue" prefWidth="120"/>
-            <Label fx:id="totalCostRowLabel"
-                   text="0.00 €"
-                   styleClass="balance-totals-value-red" prefWidth="120"/>
-            <Label fx:id="totalProfitLabel"
-                   text="0.00 €"
-                   styleClass="balance-totals-value-green" prefWidth="120"/>
+        <HBox fx:id="totalsRow" managed="false" styleClass="balance-totals-row" visible="false">
+            <Label prefWidth="280" styleClass="balance-totals-label" text="Totals" />
+            <Label fx:id="totalQtyLabel" prefWidth="100" styleClass="balance-totals-label" text="0" />
+            <Label fx:id="totalRevLabel" prefWidth="120" styleClass="balance-totals-value-blue" text="0.00 €" />
+            <Label fx:id="totalCostRowLabel" prefWidth="120" styleClass="balance-totals-value-red" text="0.00 €" />
+            <Label fx:id="totalProfitLabel" prefWidth="120" styleClass="balance-totals-value-green" text="0.00 €" />
         </HBox>
 
     </VBox>

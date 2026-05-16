@@ -164,9 +164,7 @@ public class UsersContentController {
         task.setOnFailed(e -> {
             String msg = task.getException() instanceof ApiException
                     ? task.getException().getMessage() : "Error al crear el usuario.";
-            newErrorLabel.setText(msg);
-            newErrorLabel.setVisible(true);
-            newErrorLabel.setManaged(true);
+            AlertHelper.showError("Error al crear usuario", msg);
         });
         new Thread(task).start();
     }

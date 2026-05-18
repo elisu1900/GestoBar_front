@@ -36,8 +36,8 @@
         <HBox spacing="12" alignment="CENTER_LEFT">
 
             <VBox spacing="4" HBox.hgrow="ALWAYS">
-                <Label text="Username" styleClass="field-label"/>
-                <TextField fx:id="newUsername"
+                <Label text="Name" styleClass="field-label"/>
+                <TextField fx:id="newName"
                            promptText="e.g. carlos"
                            styleClass="input-field"
                            maxWidth="Infinity"/>
@@ -81,7 +81,7 @@
     <VBox VBox.vgrow="ALWAYS" styleClass="admin-table-container">
 
         <HBox styleClass="admin-table-header">
-            <Label text="Username" styleClass="col-header" prefWidth="300"/>
+            <Label text="Name" styleClass="col-header" prefWidth="300"/>
             <Label text="Role" styleClass="col-header" prefWidth="200"/>
             <Label text="Actions" styleClass="col-header"/>
         </HBox>

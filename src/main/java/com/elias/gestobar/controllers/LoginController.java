@@ -16,7 +16,7 @@ import javafx.scene.layout.StackPane;
 public class LoginController {
 
     @FXML private StackPane rootPane;
-    @FXML private TextField     usernameField;
+    @FXML private TextField     nameField;
     @FXML private PasswordField passwordField;
     @FXML private Button        loginButton;
     @FXML private Label         errorLabel;
@@ -25,17 +25,17 @@ public class LoginController {
 
     @FXML
     public void initialize() {
-        usernameField.setOnAction(e -> passwordField.requestFocus());
-        usernameField.textProperty().addListener((o, old, val) -> hideError());
+        nameField.setOnAction(e -> passwordField.requestFocus());
+        nameField.textProperty().addListener((o, old, val) -> hideError());
         passwordField.textProperty().addListener((o, old, val) -> hideError());
     }
 
     @FXML
     private void handleLogin() {
-        String username = usernameField.getText().trim();
+        String name     = nameField.getText().trim();
         String password = passwordField.getText();
 
-        if (username.isEmpty() || password.isEmpty()) {
+        if (name.isEmpty() || password.isEmpty()) {
             showError("Por favor, rellena todos los campos.");
             return;
         }
@@ -45,7 +45,7 @@ public class LoginController {
         Task<UserSessionDto> task = new Task<>() {
             @Override
             protected UserSessionDto call() throws Exception {
-                return authService.login(username, password);
+                return authService.login(name, password);
             }
         };
 

@@ -82,7 +82,7 @@
 
 #formSection { -fx-spacing: 6; }
 
-#usernameLabel,
+#nameLabel,
 #passwordLabel {
     -fx-text-fill: #6B7280;
     -fx-font-size: 11px;
@@ -91,7 +91,7 @@
     -fx-padding: 6 0 2 0;
 }
 
-#usernameField,
+#nameField,
 #passwordField {
     -fx-font-family: "Segoe UI";
     -fx-font-size: 13px;
@@ -106,7 +106,7 @@
     -fx-pref-height: 36px;
 }
 
-#usernameField:focused,
+#nameField:focused,
 #passwordField:focused {
     -fx-border-color: #5B9BD5;
     -fx-border-width: 1.5px;
@@ -1246,4 +1246,126 @@
 .admin-tab-pane > .tab-content-area {
     -fx-background-color: #F1F3F5;
     -fx-padding: 0;
+}
+
+
+/* =============================================
+   22. CALCULATOR OPEN BUTTON
+   ============================================= */
+
+.calc-open-btn {
+    -fx-background-color: #2D3F55;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-padding: 10 16 10 16;
+    -fx-background-radius: 8;
+    -fx-border-color: #3D5068;
+    -fx-border-radius: 8;
+    -fx-border-width: 1;
+    -fx-cursor: hand;
+}
+
+.calc-open-btn:hover {
+    -fx-background-color: #3D5068;
+}
+
+
+/* =============================================
+   23. MODAL STYLES
+   ============================================= */
+
+.modal-content {
+    -fx-background-color: #FFFFFF;
+}
+
+.modal-separator .line {
+    -fx-border-color: #E5E7EB;
+}
+
+.modal-title {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1F2937;
+}
+
+.modal-total {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #5B9BD5;
+}
+
+.modal-label {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+    -fx-text-fill: #6B7280;
+}
+
+.modal-input {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 15px;
+    -fx-padding: 8 12 8 12;
+    -fx-border-color: #D1D5DB;
+    -fx-border-width: 1;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-background-color: #F9FAFB;
+}
+
+.modal-input:focused {
+    -fx-border-color: #5B9BD5;
+    -fx-background-color: #FFFFFF;
+}
+
+.modal-change {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #9CA3AF;
+}
+
+.modal-change-positive {
+    -fx-text-fill: #22C55E;
+}
+
+.modal-change-negative {
+    -fx-text-fill: #EF4444;
+}
+
+.modal-btn-cancel {
+    -fx-background-color: #F3F4F6;
+    -fx-text-fill: #374151;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-padding: 8 20 8 20;
+    -fx-background-radius: 6;
+    -fx-border-color: #D1D5DB;
+    -fx-border-radius: 6;
+    -fx-border-width: 1;
+    -fx-cursor: hand;
+}
+
+.modal-btn-cancel:hover {
+    -fx-background-color: #E5E7EB;
+}
+
+.modal-btn-confirm {
+    -fx-background-color: #22C55E;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-padding: 8 20 8 20;
+    -fx-background-radius: 6;
+    -fx-border-color: transparent;
+    -fx-border-radius: 6;
+    -fx-cursor: hand;
+}
+
+.modal-btn-confirm:hover {
+    -fx-background-color: #16A34A;
 }

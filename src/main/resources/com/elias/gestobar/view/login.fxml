@@ -39,9 +39,9 @@
 
         <VBox fx:id="formSection">
 
-            <Label fx:id="usernameLabel" text="Username"/>
-            <TextField fx:id="usernameField"
-                       promptText="Enter username"/>
+            <Label fx:id="nameLabel" text="Name"/>
+            <TextField fx:id="nameField"
+                       promptText="Enter name"/>
 
             <Label fx:id="passwordLabel" text="Password"/>
             <PasswordField fx:id="passwordField"

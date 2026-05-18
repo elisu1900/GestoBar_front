@@ -4,13 +4,15 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox xmlns="http://javafx.com/javafx/21"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.elias.gestobar.controllers.CalculatorController"
       stylesheets="@../css/styles.css"
-      styleClass="panel-dark panel-section">
+      styleClass="panel-dark panel-section"
+      fillWidth="true">
 
     <Label text="Calculator"
            styleClass="calc-title"/>
@@ -20,7 +22,9 @@
            maxWidth="Infinity"
            styleClass="calc-display"/>
 
-    <GridPane hgap="4" vgap="4">
+    <GridPane hgap="4" vgap="4"
+              maxWidth="Infinity" maxHeight="Infinity"
+              VBox.vgrow="ALWAYS">
 
         <columnConstraints>
             <ColumnConstraints percentWidth="25"/>
@@ -29,122 +33,86 @@
             <ColumnConstraints percentWidth="25"/>
         </columnConstraints>
 
-        <Button text="7"
-                onAction="#handleDigit"
-                GridPane.columnIndex="0"
-                GridPane.rowIndex="0"
-                maxWidth="Infinity"
-                styleClass="calc-btn"/>
+        <rowConstraints>
+            <RowConstraints percentHeight="25" vgrow="ALWAYS"/>
+            <RowConstraints percentHeight="25" vgrow="ALWAYS"/>
+            <RowConstraints percentHeight="25" vgrow="ALWAYS"/>
+            <RowConstraints percentHeight="25" vgrow="ALWAYS"/>
+        </rowConstraints>
 
-        <Button text="8"
-                onAction="#handleDigit"
-                GridPane.columnIndex="1"
-                GridPane.rowIndex="0"
-                maxWidth="Infinity"
+        <Button text="7" onAction="#handleDigit"
+                GridPane.columnIndex="0" GridPane.rowIndex="0"
+                maxWidth="Infinity" maxHeight="Infinity"
                 styleClass="calc-btn"/>
-
-        <Button text="9"
-                onAction="#handleDigit"
-                GridPane.columnIndex="2"
-                GridPane.rowIndex="0"
-                maxWidth="Infinity"
+        <Button text="8" onAction="#handleDigit"
+                GridPane.columnIndex="1" GridPane.rowIndex="0"
+                maxWidth="Infinity" maxHeight="Infinity"
                 styleClass="calc-btn"/>
-
-        <Button text="/"
-                onAction="#handleOp"
-                GridPane.columnIndex="3"
-                GridPane.rowIndex="0"
-                maxWidth="Infinity"
+        <Button text="9" onAction="#handleDigit"
+                GridPane.columnIndex="2" GridPane.rowIndex="0"
+                maxWidth="Infinity" maxHeight="Infinity"
+                styleClass="calc-btn"/>
+        <Button text="/" onAction="#handleOp"
+                GridPane.columnIndex="3" GridPane.rowIndex="0"
+                maxWidth="Infinity" maxHeight="Infinity"
                 styleClass="calc-btn-op"/>
 
-        <Button text="4"
-                onAction="#handleDigit"
-                GridPane.columnIndex="0"
-                GridPane.rowIndex="1"
-                maxWidth="Infinity"
+        <Button text="4" onAction="#handleDigit"
+                GridPane.columnIndex="0" GridPane.rowIndex="1"
+                maxWidth="Infinity" maxHeight="Infinity"
                 styleClass="calc-btn"/>
-
-        <Button text="5"
-                onAction="#handleDigit"
-                GridPane.columnIndex="1"
-                GridPane.rowIndex="1"
-                maxWidth="Infinity"
+        <Button text="5" onAction="#handleDigit"
+                GridPane.columnIndex="1" GridPane.rowIndex="1"
+                maxWidth="Infinity" maxHeight="Infinity"
                 styleClass="calc-btn"/>
-
-        <Button text="6"
-                onAction="#handleDigit"
-                GridPane.columnIndex="2"
-                GridPane.rowIndex="1"
-                maxWidth="Infinity"
+        <Button text="6" onAction="#handleDigit"
+                GridPane.columnIndex="2" GridPane.rowIndex="1"
+                maxWidth="Infinity" maxHeight="Infinity"
                 styleClass="calc-btn"/>
-
-        <Button text="+"
-                onAction="#handleOp"
-                GridPane.columnIndex="3"
-                GridPane.rowIndex="1"
-                maxWidth="Infinity"
+        <Button text="+" onAction="#handleOp"
+                GridPane.columnIndex="3" GridPane.rowIndex="1"
+                maxWidth="Infinity" maxHeight="Infinity"
                 styleClass="calc-btn-op"/>
 
-        <Button text="1"
-                onAction="#handleDigit"
-                GridPane.columnIndex="0"
-                GridPane.rowIndex="2"
-                maxWidth="Infinity"
+        <Button text="1" onAction="#handleDigit"
+                GridPane.columnIndex="0" GridPane.rowIndex="2"
+                maxWidth="Infinity" maxHeight="Infinity"
                 styleClass="calc-btn"/>
-
-        <Button text="2"
-                onAction="#handleDigit"
-                GridPane.columnIndex="1"
-                GridPane.rowIndex="2"
-                maxWidth="Infinity"
+        <Button text="2" onAction="#handleDigit"
+                GridPane.columnIndex="1" GridPane.rowIndex="2"
+                maxWidth="Infinity" maxHeight="Infinity"
                 styleClass="calc-btn"/>
-
-        <Button text="3"
-                onAction="#handleDigit"
-                GridPane.columnIndex="2"
-                GridPane.rowIndex="2"
-                maxWidth="Infinity"
+        <Button text="3" onAction="#handleDigit"
+                GridPane.columnIndex="2" GridPane.rowIndex="2"
+                maxWidth="Infinity" maxHeight="Infinity"
                 styleClass="calc-btn"/>
-
-        <Button text="-"
-                onAction="#handleOp"
-                GridPane.columnIndex="3"
-                GridPane.rowIndex="2"
-                maxWidth="Infinity"
+        <Button text="-" onAction="#handleOp"
+                GridPane.columnIndex="3" GridPane.rowIndex="2"
+                maxWidth="Infinity" maxHeight="Infinity"
                 styleClass="calc-btn-op"/>
 
-        <Button text="0"
-                onAction="#handleDigit"
-                GridPane.columnIndex="0"
-                GridPane.rowIndex="3"
-                maxWidth="Infinity"
+        <Button text="0" onAction="#handleDigit"
+                GridPane.columnIndex="0" GridPane.rowIndex="3"
+                maxWidth="Infinity" maxHeight="Infinity"
                 styleClass="calc-btn"/>
-
-        <Button text="."
-                onAction="#handleDot"
-                GridPane.columnIndex="1"
-                GridPane.rowIndex="3"
-                maxWidth="Infinity"
+        <Button text="." onAction="#handleDot"
+                GridPane.columnIndex="1" GridPane.rowIndex="3"
+                maxWidth="Infinity" maxHeight="Infinity"
                 styleClass="calc-btn"/>
-
-        <Button text="="
-                onAction="#handleEquals"
-                GridPane.columnIndex="2"
-                GridPane.rowIndex="3"
-                maxWidth="Infinity"
+        <Button text="=" onAction="#handleEquals"
+                GridPane.columnIndex="2" GridPane.rowIndex="3"
+                maxWidth="Infinity" maxHeight="Infinity"
                 styleClass="calc-btn-eq"/>
-
-        <Button text="*"
-                onAction="#handleOp"
-                GridPane.columnIndex="3"
-                GridPane.rowIndex="3"
-                maxWidth="Infinity"
+        <Button text="*" onAction="#handleOp"
+                GridPane.columnIndex="3" GridPane.rowIndex="3"
+                maxWidth="Infinity" maxHeight="Infinity"
                 styleClass="calc-btn-op"/>
     </GridPane>
 
     <Button text="Clear"
             onAction="#handleClear"
-            maxWidth="Infinity"
+            maxWidth="Infinity" maxHeight="Infinity"
+            VBox.vgrow="SOMETIMES"
             styleClass="calc-btn-clear"/>
 
 </VBox>

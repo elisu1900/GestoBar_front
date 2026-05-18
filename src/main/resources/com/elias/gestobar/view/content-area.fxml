@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.*?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.*?>
 
 <HBox fx:id="contentRoot" styleClass="content-root" stylesheets="@../css/styles.css" VBox.vgrow="ALWAYS"
@@ -9,7 +10,14 @@
 
     <VBox styleClass="left-column">
         <fx:include fx:id="tablePanel" source="table-panel.fxml"/>
-        <fx:include fx:id="calculator" source="calculator.fxml"/>
+        <Button text="🧮  Calculadora"
+                onAction="#handleOpenCalculator"
+                maxWidth="Infinity"
+                styleClass="calc-open-btn">
+            <VBox.margin>
+                <Insets top="8"/>
+            </VBox.margin>
+        </Button>
         <padding>
             <Insets left="10.0"/>
         </padding>

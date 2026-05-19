@@ -17,12 +17,12 @@
 
     <center>
         <TabPane styleClass="admin-tab-pane" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-            <Tab text="Productos">
+            <Tab text="Products">
                 <content>
                     <fx:include source="content-admin.fxml"/>
                 </content>
             </Tab>
-            <Tab text="Mesas">
+            <Tab text="Tables">
                 <content>
                     <fx:include source="content-admin-tables.fxml"/>
                 </content>

@@ -43,7 +43,7 @@ public class SessionManager {
     public boolean isWaiter()   { return role == Role.WAITER; }
 
     public Integer   getUserId()   { return userId; }
-    public String getNombre()   { return name; }
+    public String getName()     { return name; }
     public String getLastName() { return lastName; }
     public String getFullName() { return name + " " + lastName; }
     public Role   getRole()     { return role; }

@@ -52,6 +52,13 @@
 
     </HBox>
 
+    <Button fx:id="moveTableButton"
+            text="Mover mesa"
+            maxWidth="Infinity"
+            disable="true"
+            onAction="#handleMoveTable"
+            styleClass="move-btn"/>
+
     <Button fx:id="closeBillButton"
             text="Close Bill"
             maxWidth="Infinity"

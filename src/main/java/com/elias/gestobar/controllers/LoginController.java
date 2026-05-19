@@ -36,7 +36,7 @@ public class LoginController {
         String password = passwordField.getText();
 
         if (name.isEmpty() || password.isEmpty()) {
-            showError("Por favor, rellena todos los campos.");
+            showError("Please fill in all fields.");
             return;
         }
 
@@ -61,7 +61,7 @@ public class LoginController {
             ex.printStackTrace();
             showError(ex instanceof ApiException
                     ? ex.getMessage()
-                    : "Error de conexión con el servidor.");
+                    : "Connection error.");
             setLoading(false);
         });
 
@@ -84,7 +84,7 @@ public class LoginController {
     private void setLoading(boolean loading) {
         Platform.runLater(() -> {
             loginButton.setDisable(loading);
-            loginButton.setText(loading ? "Conectando..." : "→  Log In");
+            loginButton.setText(loading ? "Connecting..." : "→  Log In");
         });
     }
 }

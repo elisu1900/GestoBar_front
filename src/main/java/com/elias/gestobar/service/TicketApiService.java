@@ -50,6 +50,15 @@ public class TicketApiService {
         api.patch(AppConfig.getTicketsEndpoint() + "/" + ticketId + "/close");
     }
 
+    // PATCH /api/tickets/{ticketId}/move?targetTableId={id}
+    public TicketDto moveTicket(Integer ticketId, Integer targetTableId) throws ApiException {
+        return api.patch(
+            AppConfig.getTicketsEndpoint() + "/" + ticketId + "/move?targetTableId=" + targetTableId,
+            null,
+            TicketDto.class
+        );
+    }
+
     // GET /api/tickets/table/{tableId}/open
     public TicketDto findOpenTicketByTable(Integer tableId) throws ApiException {
         try {

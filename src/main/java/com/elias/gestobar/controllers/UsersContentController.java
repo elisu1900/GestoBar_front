@@ -48,7 +48,7 @@ public class UsersContentController {
             }
         };
         task.setOnSucceeded(e -> renderUsers(task.getValue()));
-        task.setOnFailed(e -> AlertHelper.showError("Error", "No se pudieron cargar los usuarios."));
+        task.setOnFailed(e -> AlertHelper.showError("Error", "Could not load users."));
         new Thread(task).start();
     }
 
@@ -91,8 +91,8 @@ public class UsersContentController {
 
     private void handleDelete(UserDto user) {
         boolean confirmed = AlertHelper.showConfirm(
-                "Eliminar usuario",
-                "¿Eliminar el usuario \"" + user.name() + "\"?");
+                "Delete user",
+                "Delete user \"" + user.name() + "\"?");
 
         if (!confirmed) return;
 
@@ -106,7 +106,7 @@ public class UsersContentController {
         task.setOnSucceeded(e -> loadUsers());
         task.setOnFailed(e -> {
             String msg = task.getException() instanceof ApiException
-                    ? task.getException().getMessage() : "No se pudo eliminar el usuario.";
+                    ? task.getException().getMessage() : "Could not delete user.";
             AlertHelper.showError("Error", msg);
         });
         new Thread(task).start();
@@ -163,27 +163,27 @@ public class UsersContentController {
         });
         task.setOnFailed(e -> {
             String msg = task.getException() instanceof ApiException
-                    ? task.getException().getMessage() : "Error al crear el usuario.";
-            AlertHelper.showError("Error al crear usuario", msg);
+                    ? task.getException().getMessage() : "Error creating user.";
+            AlertHelper.showError("Error creating user", msg);
         });
         new Thread(task).start();
     }
 
     private boolean isValid(String username,String lastName, String password, String role) {
         if (username.isEmpty()) {
-            showError("El nombre de usuario no puede estar vacío.");
+            showError("Username cannot be empty.");
             return false;
         }
         if (lastName.isEmpty()) {
-            showError("El apellido no puede estar vacío.");
+            showError("Last name cannot be empty.");
             return false;
         }
         if (password.length() < 6) {
-            showError("La contraseña debe tener al menos 6 caracteres.");
+            showError("Password must be at least 6 characters.");
             return false;
         }
         if (role == null || role.isEmpty()) {
-            showError("Selecciona un rol.");
+            showError("Please select a role.");
             return false;
         }
         return true;

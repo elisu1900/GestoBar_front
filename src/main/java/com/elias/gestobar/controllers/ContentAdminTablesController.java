@@ -40,7 +40,7 @@ public class ContentAdminTablesController {
             }
         };
         task.setOnSucceeded(e -> renderTables(task.getValue()));
-        task.setOnFailed(e -> AlertHelper.showError("Error", "No se pudieron cargar las mesas."));
+        task.setOnFailed(e -> AlertHelper.showError("Error", "Could not load tables."));
         new Thread(task).start();
     }
 
@@ -52,11 +52,11 @@ public class ContentAdminTablesController {
     }
 
     private HBox buildTableRow(TableDto table) {
-        Label numberLabel = new Label("Mesa " + table.number());
+        Label numberLabel = new Label("Table " + table.number());
         numberLabel.getStyleClass().add("product-row-label");
         numberLabel.setPrefWidth(200);
 
-        Label capacityLabel = new Label(table.capacity() + " personas");
+        Label capacityLabel = new Label(table.capacity() + " seats");
         capacityLabel.getStyleClass().add("product-row-label");
         capacityLabel.setPrefWidth(200);
 
@@ -74,8 +74,8 @@ public class ContentAdminTablesController {
 
     private void handleDelete(TableDto table) {
         boolean confirmed = AlertHelper.showConfirm(
-                "Eliminar mesa",
-                "¿Eliminar la Mesa " + table.number() + "? Los tickets existentes no se verán afectados.");
+                "Delete table",
+                "Delete Table " + table.number() + "? Existing tickets will not be affected.");
         if (!confirmed) return;
 
         Task<Void> task = new Task<>() {
@@ -88,7 +88,7 @@ public class ContentAdminTablesController {
         task.setOnSucceeded(e -> loadTables());
         task.setOnFailed(e -> {
             String msg = task.getException() instanceof ApiException
-                    ? task.getException().getMessage() : "No se pudo eliminar la mesa.";
+                    ? task.getException().getMessage() : "Could not delete table.";
             AlertHelper.showError("Error", msg);
         });
         new Thread(task).start();
@@ -135,8 +135,8 @@ public class ContentAdminTablesController {
         });
         task.setOnFailed(e -> {
             String msg = task.getException() instanceof ApiException
-                    ? task.getException().getMessage() : "Error al crear la mesa.";
-            AlertHelper.showError("Error al crear mesa", msg);
+                    ? task.getException().getMessage() : "Error creating table.";
+            AlertHelper.showError("Error creating table", msg);
         });
         new Thread(task).start();
     }
@@ -145,11 +145,11 @@ public class ContentAdminTablesController {
         try {
             int n = Integer.parseInt(numberStr);
             int c = Integer.parseInt(capacityStr);
-            if (n < 1) { showError("El número de mesa debe ser mayor que 0."); return false; }
-            if (c < 1) { showError("La capacidad debe ser mayor que 0."); return false; }
+            if (n < 1) { showError("Table number must be greater than 0."); return false; }
+            if (c < 1) { showError("Capacity must be greater than 0."); return false; }
             return true;
         } catch (NumberFormatException e) {
-            showError("El número de mesa y la capacidad deben ser enteros válidos.");
+            showError("Table number and capacity must be valid integers.");
             return false;
         }
     }

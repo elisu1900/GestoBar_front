@@ -14,9 +14,9 @@
       styleClass="admin-root">
 
     <HBox alignment="CENTER_LEFT">
-        <Label text="Gestión de Mesas" styleClass="admin-title"/>
+        <Label text="Table Management" styleClass="admin-title"/>
         <Region HBox.hgrow="ALWAYS"/>
-        <Button text="+ Añadir Mesa"
+        <Button text="+ Add Table"
                 onAction="#handleAddTable"
                 styleClass="btn-primary"/>
     </HBox>
@@ -26,19 +26,19 @@
           managed="false"
           styleClass="admin-card">
 
-        <Label text="Nueva Mesa" styleClass="section-title"/>
+        <Label text="New Table" styleClass="section-title"/>
 
         <HBox spacing="12" alignment="CENTER_LEFT">
             <VBox spacing="4" prefWidth="160">
-                <Label text="Número de Mesa" styleClass="field-label"/>
+                <Label text="Table Number" styleClass="field-label"/>
                 <TextField fx:id="newNumber"
-                           promptText="Ej: 5"
+                           promptText="e.g. 5"
                            styleClass="input-field"/>
             </VBox>
             <VBox spacing="4" prefWidth="160">
-                <Label text="Capacidad (personas)" styleClass="field-label"/>
+                <Label text="Capacity (seats)" styleClass="field-label"/>
                 <TextField fx:id="newCapacity"
-                           promptText="Ej: 4"
+                           promptText="e.g. 4"
                            styleClass="input-field"/>
             </VBox>
             <HBox spacing="6" alignment="BOTTOM_CENTER">
@@ -57,9 +57,9 @@
     <VBox VBox.vgrow="ALWAYS" styleClass="admin-table-container">
 
         <HBox styleClass="admin-table-header">
-            <Label text="Mesa" styleClass="col-header" prefWidth="200"/>
-            <Label text="Capacidad" styleClass="col-header" prefWidth="200"/>
-            <Label text="Acciones" styleClass="col-header"/>
+            <Label text="Table" styleClass="col-header" prefWidth="200"/>
+            <Label text="Capacity" styleClass="col-header" prefWidth="200"/>
+            <Label text="Actions" styleClass="col-header"/>
         </HBox>
 
         <ScrollPane fitToWidth="true"

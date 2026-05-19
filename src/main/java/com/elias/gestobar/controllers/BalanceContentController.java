@@ -46,7 +46,7 @@ public class BalanceContentController {
         };
 
         task.setOnSucceeded(e -> renderBalance(task.getValue()));
-        task.setOnFailed(e -> AlertHelper.showError("Error", "No se pudo cargar el balance diario."));
+        task.setOnFailed(e -> AlertHelper.showError("Error", "Could not load daily balance."));
         new Thread(task).start();
     }
 
@@ -147,7 +147,7 @@ public class BalanceContentController {
         task.setOnSucceeded(e -> loadBalance());
         task.setOnFailed(e -> {
             String msg = task.getException() instanceof ApiException
-                    ? task.getException().getMessage() : "Error al resetear el día.";
+                    ? task.getException().getMessage() : "Error resetting the day.";
             AlertHelper.showError("Error", msg);
         });
         new Thread(task).start();

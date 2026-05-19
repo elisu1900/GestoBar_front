@@ -42,7 +42,7 @@ public class ContentAdminController {
             }
         };
         task.setOnSucceeded(e -> renderProducts(task.getValue()));
-        task.setOnFailed(e -> AlertHelper.showError("Error", "No se pudieron cargar los productos."));
+        task.setOnFailed(e -> AlertHelper.showError("Error", "Could not load products."));
         new Thread(task).start();
     }
 
@@ -137,7 +137,7 @@ public class ContentAdminController {
         String cost = costField.getText().trim();
 
         if (!isValid(name, sell, cost)) {
-            AlertHelper.showError("Error", "Revisa los campos. Nombre obligatorio y precios mayores que 0.");
+            AlertHelper.showError("Error", "Check the fields. Name required and prices must be greater than 0.");
             return;
         }
 
@@ -158,7 +158,7 @@ public class ContentAdminController {
         task.setOnSucceeded(e -> replaceRow(row, buildViewRow(task.getValue())));
         task.setOnFailed(e -> {
             String msg = task.getException() instanceof ApiException
-                    ? task.getException().getMessage() : "Error al actualizar.";
+                    ? task.getException().getMessage() : "Error updating.";
             AlertHelper.showError("Error", msg);
         });
         new Thread(task).start();
@@ -167,8 +167,8 @@ public class ContentAdminController {
 
     private void handleDelete(ProductDto product) {
         boolean confirmed = AlertHelper.showConfirm(
-                "Eliminar producto",
-                "¿Eliminar \"" + product.name() + "\"?");
+                "Delete product",
+                "Delete \"" + product.name() + "\"?");
 
         if (!confirmed) return;
 
@@ -180,7 +180,7 @@ public class ContentAdminController {
             }
         };
         task.setOnSucceeded(e -> loadProducts());
-        task.setOnFailed(e -> AlertHelper.showError("Error", "No se pudo eliminar el producto."));
+        task.setOnFailed(e -> AlertHelper.showError("Error", "Could not delete product."));
         new Thread(task).start();
     }
 
@@ -209,7 +209,7 @@ public class ContentAdminController {
         String cost = newCostPrice.getText().trim();
 
         if (!isValid(name, sell, cost)) {
-            newErrorLabel.setText("Revisa los campos. Nombre obligatorio y precios mayores que 0.");
+            newErrorLabel.setText("Check the fields. Name required and prices must be greater than 0.");
             newErrorLabel.setVisible(true);
             newErrorLabel.setManaged(true);
             return;
@@ -232,7 +232,7 @@ public class ContentAdminController {
         });
         task.setOnFailed(e -> {
             String msg = task.getException() instanceof ApiException
-                    ? task.getException().getMessage() : "Error al crear el producto.";
+                    ? task.getException().getMessage() : "Error creating product.";
             newErrorLabel.setText(msg);
             newErrorLabel.setVisible(true);
             newErrorLabel.setManaged(true);

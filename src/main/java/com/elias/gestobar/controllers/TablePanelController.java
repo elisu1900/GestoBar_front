@@ -11,22 +11,28 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.FlowPane;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class TablePanelController {
 
     @FXML
     private FlowPane tablesContainer;
 
-    private final TableApiService tableService = new TableApiService();
+    private final TableApiService  tableService  = new TableApiService();
     private final TicketApiService ticketService = new TicketApiService();
 
-    private OrderPanelController orderPanelController;
-    private NavbarController navbarController;
+    private OrderPanelController   orderPanelController;
+    private NavbarController       navbarController;
     private ProductPanelController productPanelController;
 
-    private Button selectedButton = null;
-    private TableDto selectedTable = null;
+    private Button   selectedButton   = null;
+    private TableDto selectedTable    = null;
+
+    private final Set<Integer> occupiedTableIds = new HashSet<>();
+
+    private record LoadResult(List<TableDto> tables, Set<Integer> occupied) {}
 
     @FXML
     public void initialize() {
@@ -46,14 +52,25 @@ public class TablePanelController {
     }
 
     private void loadTables() {
-        Task<List<TableDto>> task = new Task<List<TableDto>>() {
+        Task<LoadResult> task = new Task<>() {
             @Override
-            protected List<TableDto> call() throws Exception {
-                return tableService.getAllTables();
+            protected LoadResult call() throws Exception {
+                List<TableDto> tables = tableService.getAllTables();
+                Set<Integer> occupied = new HashSet<>();
+                for (TableDto table : tables) {
+                    TicketDto ticket = ticketService.findOpenTicketByTable(table.tableId());
+                    if (ticket != null) occupied.add(table.tableId());
+                }
+                return new LoadResult(tables, occupied);
             }
         };
-        task.setOnSucceeded(e -> renderTables(task.getValue()));
-        task.setOnFailed(e -> AlertHelper.showError("Error", "No se pudieron cargar las mesas."));
+        task.setOnSucceeded(e -> {
+            LoadResult result = task.getValue();
+            occupiedTableIds.clear();
+            occupiedTableIds.addAll(result.occupied());
+            renderTables(result.tables());
+        });
+        task.setOnFailed(e -> AlertHelper.showError("Error", "Could not load tables."));
         new Thread(task).start();
     }
 
@@ -66,25 +83,31 @@ public class TablePanelController {
 
     private Button createTableButton(TableDto table) {
         Button btn = new Button("Table\n" + table.number());
-        btn.getStyleClass().add("table-btn");
         btn.setPrefWidth(72);
         btn.setPrefHeight(60);
         btn.setWrapText(true);
+        applyBaseStyle(btn, table.tableId());
         btn.setOnAction(e -> handleTableClick(table, btn));
         return btn;
     }
 
+    private void applyBaseStyle(Button btn, Integer tableId) {
+        btn.getStyleClass().removeAll("table-btn", "table-btn-occupied", "table-btn-selected");
+        if (occupiedTableIds.contains(tableId)) {
+            btn.getStyleClass().add("table-btn-occupied");
+        } else {
+            btn.getStyleClass().add("table-btn");
+        }
+    }
+
     private void handleTableClick(TableDto table, Button btn) {
         if (selectedButton != null) {
-            selectedButton.getStyleClass().remove("table-btn-selected");
-            if (!selectedButton.getStyleClass().contains("table-btn")) {
-                selectedButton.getStyleClass().add("table-btn");
-            }
+            applyBaseStyle(selectedButton, selectedTable.tableId());
         }
 
         selectedButton = btn;
-        selectedTable = table;
-        btn.getStyleClass().remove("table-btn");
+        selectedTable  = table;
+        btn.getStyleClass().removeAll("table-btn", "table-btn-occupied");
         btn.getStyleClass().add("table-btn-selected");
 
         if (navbarController != null)
@@ -100,7 +123,7 @@ public class TablePanelController {
     }
 
     private void resolveTicketForTable(TableDto table) {
-        Task<TicketDto> task = new Task<TicketDto>() {
+        Task<TicketDto> task = new Task<>() {
             @Override
             protected TicketDto call() throws Exception {
                 return ticketService.findOpenTicketByTable(table.tableId());
@@ -110,12 +133,14 @@ public class TablePanelController {
         task.setOnSucceeded(e -> {
             TicketDto ticket = task.getValue();
             if (ticket != null) {
+                occupiedTableIds.add(table.tableId());
                 SessionManager.getInstance().setActiveTicketId((long) ticket.ticketId());
                 if (productPanelController != null)
                     productPanelController.setActiveTicketId(ticket.ticketId());
                 if (orderPanelController != null)
                     orderPanelController.renderTicket(ticket);
             } else {
+                occupiedTableIds.remove(table.tableId());
                 SessionManager.getInstance().clearActiveTicketId();
                 if (productPanelController != null)
                     productPanelController.setActiveTicketId(null);
@@ -125,6 +150,7 @@ public class TablePanelController {
         });
 
         task.setOnFailed(e -> {
+            occupiedTableIds.remove(table.tableId());
             SessionManager.getInstance().clearActiveTicketId();
             if (productPanelController != null)
                 productPanelController.setActiveTicketId(null);
@@ -135,12 +161,33 @@ public class TablePanelController {
         new Thread(task).start();
     }
 
+    public void markTableOccupied(Integer tableId) {
+        occupiedTableIds.add(tableId);
+        tablesContainer.getChildren().stream()
+                .filter(n -> n instanceof Button)
+                .map(n -> (Button) n)
+                .filter(b -> b != selectedButton)
+                .forEach(b -> {
+                    String label = "Table\n" + tableId;
+                    if (b.getText().equals(label)) applyBaseStyle(b, tableId);
+                });
+    }
+
+    public void markTableFree(Integer tableId) {
+        occupiedTableIds.remove(tableId);
+        tablesContainer.getChildren().stream()
+                .filter(n -> n instanceof Button)
+                .map(n -> (Button) n)
+                .filter(b -> b != selectedButton)
+                .forEach(b -> {
+                    String label = "Table\n" + tableId;
+                    if (b.getText().equals(label)) applyBaseStyle(b, tableId);
+                });
+    }
+
     public void clearSelection() {
         if (selectedButton != null) {
-            selectedButton.getStyleClass().remove("table-btn-selected");
-            if (!selectedButton.getStyleClass().contains("table-btn")) {
-                selectedButton.getStyleClass().add("table-btn");
-            }
+            applyBaseStyle(selectedButton, selectedTable != null ? selectedTable.tableId() : -1);
             selectedButton = null;
         }
         selectedTable = null;
@@ -152,5 +199,45 @@ public class TablePanelController {
 
     public void refresh() {
         loadTables();
+    }
+
+    public void refreshAndSelectTable(Integer targetTableId) {
+        Task<LoadResult> task = new Task<>() {
+            @Override
+            protected LoadResult call() throws Exception {
+                List<TableDto> tables = tableService.getAllTables();
+                Set<Integer> occupied = new HashSet<>();
+                for (TableDto table : tables) {
+                    TicketDto ticket = ticketService.findOpenTicketByTable(table.tableId());
+                    if (ticket != null) occupied.add(table.tableId());
+                }
+                return new LoadResult(tables, occupied);
+            }
+        };
+
+        task.setOnSucceeded(e -> javafx.application.Platform.runLater(() -> {
+            LoadResult result = task.getValue();
+            occupiedTableIds.clear();
+            occupiedTableIds.addAll(result.occupied());
+
+            selectedButton = null;
+            selectedTable  = null;
+            tablesContainer.getChildren().clear();
+
+            for (TableDto table : result.tables()) {
+                Button btn = createTableButton(table);
+                tablesContainer.getChildren().add(btn);
+                if (table.tableId().equals(targetTableId)) {
+                    selectedButton = btn;
+                    selectedTable  = table;
+                    btn.getStyleClass().removeAll("table-btn", "table-btn-occupied");
+                    btn.getStyleClass().add("table-btn-selected");
+                    if (navbarController != null)    navbarController.setActiveTable(table);
+                    if (productPanelController != null) productPanelController.onTableSelected(table);
+                }
+            }
+        }));
+        task.setOnFailed(e -> AlertHelper.showError("Error", "Could not load tables."));
+        new Thread(task).start();
     }
 }

@@ -310,6 +310,26 @@
     -fx-effect: dropshadow(gaussian, rgba(91,155,213,0.2), 6, 0, 0, 2);
 }
 
+.table-btn-occupied {
+    -fx-background-color: #FFFBEB;
+    -fx-text-fill: #92400E;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-border-color: #FCD34D;
+    -fx-border-width: 1px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+    -fx-text-alignment: CENTER;
+    -fx-effect: dropshadow(gaussian, rgba(245,158,11,0.15), 4, 0, 0, 1);
+}
+
+.table-btn-occupied:hover {
+    -fx-border-color: #F59E0B;
+    -fx-effect: dropshadow(gaussian, rgba(245,158,11,0.3), 6, 0, 0, 2);
+}
+
 .table-btn-selected {
     -fx-background-color: #EBF4FF;
     -fx-text-fill: #2563EB;
@@ -618,6 +638,28 @@
 /* =============================================
    13. CLOSE BILL
    ============================================= */
+
+.move-btn {
+    -fx-background-color: #2D3F55;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8px;
+    -fx-padding: 10 0 10 0;
+    -fx-cursor: hand;
+    -fx-pref-height: 38px;
+    -fx-border-width: 0;
+}
+
+.move-btn:hover   { -fx-background-color: #3D5470; }
+.move-btn:pressed { -fx-background-color: #4A6080; }
+.move-btn:disabled {
+    -fx-background-color: #1E2A3A;
+    -fx-text-fill: #4A6080;
+    -fx-cursor: default;
+}
+
 
 .success-btn {
     -fx-background-color: #22C55E;

@@ -60,7 +60,7 @@ public class ProductPanelController {
         };
 
         task.setOnSucceeded(e -> renderProducts(task.getValue()));
-        task.setOnFailed(e -> AlertHelper.showError("Error", "No se pudieron cargar los productos."));
+        task.setOnFailed(e -> AlertHelper.showError("Error", "Could not load products."));
         new Thread(task).start();
     }
 
@@ -88,7 +88,7 @@ public class ProductPanelController {
 
     private void handleProductClick(ProductDto product) {
         if (selectedTable == null) {
-            AlertHelper.showError("Sin mesa", "Selecciona una mesa primero.");
+            AlertHelper.showError("No table selected", "Please select a table first.");
             return;
         }
 
@@ -108,7 +108,7 @@ public class ProductPanelController {
 
         task.setOnFailed(e -> {
             Throwable ex = task.getException();
-            String msg = ex instanceof ApiException ? ex.getMessage() : "Error al añadir el producto.";
+            String msg = ex instanceof ApiException ? ex.getMessage() : "Error adding product.";
             AlertHelper.showError("Error", msg);
         });
 

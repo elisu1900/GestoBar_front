@@ -58,7 +58,7 @@ public class ApiClient {
             handleStatus(response.statusCode(), response.body());
             return response.body();
         } catch (IOException | InterruptedException e) {
-            throw new ApiException("No se pudo conectar con el servidor");
+            throw new ApiException("Unable to connect to the server");
         }
     }
 
@@ -128,7 +128,7 @@ public class ApiClient {
             handleStatus(response.statusCode(), response.body());
             return JsonMapper.fromJson(response.body(), responseType);
         } catch (IOException | InterruptedException e) {
-            throw new ApiException("No se pudo conectar con el servidor");
+            throw new ApiException("Unable to connect to the server");
         }
     }
 
@@ -137,7 +137,7 @@ public class ApiClient {
             var response = client.send(request, HttpResponse.BodyHandlers.ofString());
             handleStatus(response.statusCode(), response.body());
         } catch (IOException | InterruptedException e) {
-            throw new ApiException("No se pudo conectar con el servidor");
+            throw new ApiException("Unable to connect to the server");
         }
     }
 

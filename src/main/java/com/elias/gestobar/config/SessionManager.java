@@ -13,7 +13,7 @@ public class SessionManager {
     private Role    role;
     private boolean active;
 
-    private Long activeTicketId;
+    private Integer activeTicketId;
 
     private SessionManager() {}
 
@@ -49,7 +49,7 @@ public class SessionManager {
     public Role   getRole()     { return role; }
     public boolean isActive()   { return active; }
 
-    public Long getActiveTicketId()          { return activeTicketId; }
-    public void setActiveTicketId(Long id)   { this.activeTicketId = id; }
+    public Integer getActiveTicketId()          { return activeTicketId; }
+    public void setActiveTicketId(Integer id)   { this.activeTicketId = id; }
     public void clearActiveTicketId()        { this.activeTicketId = null; }
 }

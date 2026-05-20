@@ -63,6 +63,7 @@ public class NavbarController {
         try {
             authService.logout();
         } catch (ApiException ignored) {}
+        SessionManager.getInstance().clear();
         Router.goToLogin();
     }
 

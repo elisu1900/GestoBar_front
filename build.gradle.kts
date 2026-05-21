@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "com.elias"
-version = "1.0-SNAPSHOT"
+version = "1.0.0"
 
 repositories {
     mavenCentral()
@@ -26,7 +26,7 @@ tasks.withType<JavaCompile> {
 }
 
 application {
-    mainModule.set("com.elias.gestobar")
+    mainModule.set("GestoBar.main")
     mainClass.set("com.elias.gestobar.Launcher")
 }
 
@@ -50,6 +50,18 @@ jlink {
     imageZip.set(layout.buildDirectory.file("/distributions/app-${javafx.platform.classifier}.zip"))
     options.set(listOf("--strip-debug", "--compress", "2", "--no-header-files", "--no-man-pages"))
     launcher {
-        name = "app"
+        name = "GestoBar"
+    }
+    jpackage {
+        installerType = "exe"
+        appVersion = "1.0.0"
+        icon = "src/main/resources/com/elias/gestobar/images/logo.ico"
+        installerOptions = listOf(
+            "--win-dir-chooser",
+            "--win-shortcut",
+            "--win-shortcut-prompt",
+            "--win-menu",
+            "--vendor", "Elias Wassit"
+        )
     }
 }

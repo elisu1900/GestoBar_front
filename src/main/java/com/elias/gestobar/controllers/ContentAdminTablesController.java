@@ -2,7 +2,9 @@ package com.elias.gestobar.controllers;
 
 import com.elias.gestobar.model.dto.TableDto;
 import com.elias.gestobar.model.dto.TableRequestDto;
+import com.elias.gestobar.model.dto.TicketDto;
 import com.elias.gestobar.service.TableApiService;
+import com.elias.gestobar.service.TicketApiService;
 import com.elias.gestobar.util.AlertHelper;
 import com.elias.gestobar.util.ApiException;
 import javafx.concurrent.Task;
@@ -25,7 +27,8 @@ public class ContentAdminTablesController {
     @FXML private Label     newErrorLabel;
     @FXML private VBox      tableListContainer;
 
-    private final TableApiService tableService = new TableApiService();
+    private final TableApiService  tableService  = new TableApiService();
+    private final TicketApiService ticketService = new TicketApiService();
 
     @FXML
     public void initialize() {
@@ -73,11 +76,56 @@ public class ContentAdminTablesController {
     }
 
     private void handleDelete(TableDto table) {
-        boolean confirmed = AlertHelper.showConfirm(
-                "Delete table",
-                "Delete Table " + table.number() + "? Existing tickets will not be affected.");
-        if (!confirmed) return;
+        Task<TicketDto> checkTask = new Task<>() {
+            @Override
+            protected TicketDto call() throws Exception {
+                return ticketService.findOpenTicketByTable(table.tableId());
+            }
+        };
+        checkTask.setOnSucceeded(e -> {
+            TicketDto openTicket = checkTask.getValue();
+            if (openTicket != null) {
+                boolean confirmed = AlertHelper.showConfirm(
+                        "Delete table",
+                        "Table " + table.number() + " has an open ticket.\n\n" +
+                        "Are you sure you want to delete it? The open ticket will be closed as cancelled.");
+                if (!confirmed) return;
+                doDeleteWithCancel(table, openTicket.ticketId());
+            } else {
+                boolean confirmed = AlertHelper.showConfirm(
+                        "Delete table",
+                        "Delete Table " + table.number() + "?");
+                if (!confirmed) return;
+                doDelete(table);
+            }
+        });
+        checkTask.setOnFailed(e -> {
+            String msg = checkTask.getException() instanceof ApiException
+                    ? checkTask.getException().getMessage() : "Could not check table status.";
+            AlertHelper.showError("Error", msg);
+        });
+        new Thread(checkTask).start();
+    }
 
+    private void doDeleteWithCancel(TableDto table, Integer ticketId) {
+        Task<Void> task = new Task<>() {
+            @Override
+            protected Void call() throws Exception {
+                ticketService.cancelTicket(ticketId);
+                tableService.deactivateTable(table.tableId());
+                return null;
+            }
+        };
+        task.setOnSucceeded(e -> loadTables());
+        task.setOnFailed(e -> {
+            String msg = task.getException() instanceof ApiException
+                    ? task.getException().getMessage() : "Could not delete table.";
+            AlertHelper.showError("Error", msg);
+        });
+        new Thread(task).start();
+    }
+
+    private void doDelete(TableDto table) {
         Task<Void> task = new Task<>() {
             @Override
             protected Void call() throws Exception {

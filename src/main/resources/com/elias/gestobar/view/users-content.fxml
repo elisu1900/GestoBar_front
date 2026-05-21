@@ -37,7 +37,7 @@
 
             <VBox spacing="4" HBox.hgrow="ALWAYS">
                 <Label text="Name" styleClass="field-label"/>
-                <TextField fx:id="newName"
+                <TextField fx:id="newUsername"
                            promptText="e.g. carlos"
                            styleClass="input-field"
                            maxWidth="Infinity"/>

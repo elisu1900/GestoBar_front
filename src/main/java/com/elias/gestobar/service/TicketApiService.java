@@ -50,6 +50,11 @@ public class TicketApiService {
         api.patch(AppConfig.getTicketsEndpoint() + "/" + ticketId + "/close");
     }
 
+    // PATCH /api/tickets/{ticketId}/cancel
+    public void cancelTicket(Integer ticketId) throws ApiException {
+        api.patch(AppConfig.getTicketsEndpoint() + "/" + ticketId + "/cancel");
+    }
+
     // PATCH /api/tickets/{ticketId}/move?targetTableId={id}
     public TicketDto moveTicket(Integer ticketId, Integer targetTableId) throws ApiException {
         return api.patch(

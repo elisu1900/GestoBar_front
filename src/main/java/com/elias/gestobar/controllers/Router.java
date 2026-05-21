@@ -34,7 +34,9 @@ public class Router {
             var url = Router.class.getResource("/com/elias/gestobar/view/" + fxmlName + ".fxml");
             if (url == null) throw new IOException("FXML no encontrado: " + fxmlName);
 
-            Parent root = FXMLLoader.load(url);
+            FXMLLoader loader = new FXMLLoader(url);
+            loader.setClassLoader(Router.class.getClassLoader());
+            Parent root = loader.load();
             Scene scene = primaryStage.getScene();
 
             if (scene == null) {
@@ -45,9 +47,22 @@ public class Router {
 
             primaryStage.show();
 
-        } catch (IOException e) {
+        } catch (Exception e) {
+            try (var fw = new java.io.FileWriter(
+                    System.getProperty("user.home") + "/gestobar-error.log", true)) {
+                fw.write("=== Error loading: " + fxmlName + " ===\n");
+                fw.write(e + "\n");
+                for (var el : e.getStackTrace()) fw.write("  at " + el + "\n");
+                Throwable cause = e.getCause();
+                while (cause != null) {
+                    fw.write("Caused by: " + cause + "\n");
+                    for (var el : cause.getStackTrace()) fw.write("  at " + el + "\n");
+                    cause = cause.getCause();
+                }
+                fw.write("\n");
+            } catch (Exception ignored) {}
             AlertHelper.showError("Error de navegación",
-                    "No se pudo cargar la pantalla: " + fxmlName);
+                    "No se pudo cargar la pantalla: " + fxmlName + "\n" + e.getMessage());
         }
     }
 

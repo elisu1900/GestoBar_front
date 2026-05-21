@@ -32,7 +32,7 @@
         <VBox styleClass="balance-stat-card" HBox.hgrow="ALWAYS">
             <HBox alignment="CENTER_LEFT" spacing="6">
                 <Label styleClass="balance-stat-icon" text="📊" />
-                <Label styleClass="balance-stat-label" text="products Costs" />
+                <Label styleClass="balance-stat-label" text="Product Costs" />
             </HBox>
             <Label fx:id="totalCostsLabel" styleClass="balance-stat-value-red" text="0.00 €" />
         </VBox>
@@ -40,7 +40,7 @@
         <VBox styleClass="balance-stat-card" HBox.hgrow="ALWAYS">
             <HBox alignment="CENTER_LEFT" spacing="6">
                 <Label styleClass="balance-stat-icon-green" text="↗" />
-                <Label styleClass="balance-stat-label" text="product benefits" />
+                <Label styleClass="balance-stat-label" text="Product Benefits" />
             </HBox>
             <Label fx:id="realProfitLabel" styleClass="balance-stat-value-green" text="0.00 €" />
         </VBox>

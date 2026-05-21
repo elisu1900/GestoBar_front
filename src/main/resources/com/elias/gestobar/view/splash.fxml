@@ -15,7 +15,7 @@
            fx:id="rootPane"
            prefWidth="900"
            prefHeight="520"
-           stylesheets="@/com/elias/gestobar/css/styles.css">
+           stylesheets="@../css/styles.css">
 
     <VBox alignment="CENTER" spacing="18">
 
@@ -26,7 +26,7 @@
                        fitHeight="48"
                        preserveRatio="true"
             >
-                <Image url="@/com/elias/gestobar/images/logo.png"/>
+                <Image url="@../images/logo.png"/>
             </ImageView>
         </StackPane>
 

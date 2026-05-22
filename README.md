@@ -44,9 +44,10 @@ Edita `api.base.url` si el backend corre en una máquina diferente.
 
 No necesitas tener Java instalado. El instalador incluye su propio runtime.
 
-1. Descarga el instalador haciendo clic aquí: **[⬇️ Descargar GestoBar-1.0.0.exe](https://github.com/elisu1900/GestoBar/raw/develop/build/jpackage/GestoBar/GestoBar-1.0.0.exe)**
-2. Ejecuta el instalador y sigue los pasos (puedes elegir el directorio de instalación y crear accesos directos en el escritorio y el menú inicio).
-3. Abre **GestoBar** desde el acceso directo o desde el directorio de instalación.
+1. Accede al instalador haciendo clic aquí: **[⬇️ Descargar GestoBar](https://github.com/elisu1900/GestoBar_front/tree/develop/build/jpackage/GestoBar)**
+2. Descarga el archivo `GestoBar-1.0.0.exe`.
+3. Ejecuta el instalador y sigue los pasos (puedes elegir el directorio de instalación y crear accesos directos en el escritorio y el menú inicio).
+4. Abre **GestoBar** desde el acceso directo o desde el directorio de instalación.
 
 > Antes de arrancar la app asegúrate de que el backend esté levantado y de que la URL en `app.properties` apunte a la máquina correcta (ver sección [Configuración](#configuración)).
 

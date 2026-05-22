@@ -9,6 +9,7 @@ import com.elias.gestobar.util.AlertHelper;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 
 import java.util.ArrayList;
@@ -81,6 +82,12 @@ public class TablePanelController {
         List<TableDto> sorted = new ArrayList<>(tables);
         Collections.sort(sorted, Comparator.comparingInt(TableDto::number));
         tablesContainer.getChildren().clear();
+        if (sorted.isEmpty()) {
+            Label hint = new Label("Add tables to view them");
+            hint.getStyleClass().add("empty-hint");
+            tablesContainer.getChildren().add(hint);
+            return;
+        }
         for (TableDto table : sorted) {
             tablesContainer.getChildren().add(createTableButton(table));
         }

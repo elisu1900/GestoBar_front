@@ -1499,3 +1499,10 @@
     -fx-font-size: 13px;
     -fx-padding: 16;
 }
+
+.empty-hint {
+    -fx-text-fill: #9CA3AF;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 12px;
+    -fx-padding: 12 8 8 8;
+}

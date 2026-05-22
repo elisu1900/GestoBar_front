@@ -67,6 +67,12 @@ public class ProductPanelController {
 
     private void renderProducts(List<ProductDto> products) {
         productsContainer.getChildren().clear();
+        if (products.isEmpty()) {
+            Label hint = new Label("Add products to view them");
+            hint.getStyleClass().add("empty-hint");
+            productsContainer.getChildren().add(hint);
+            return;
+        }
         for (ProductDto product : products) {
             VBox cell = createProductCell(product);
             productsContainer.getChildren().add(cell);

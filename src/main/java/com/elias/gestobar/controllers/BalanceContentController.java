@@ -60,8 +60,7 @@ public class BalanceContentController {
         List<ProductBalanceDto> breakdown = balance.breakdown();
         if (breakdown == null || breakdown.isEmpty()) {
             Label empty = new Label("No sales data for today.");
-            empty.setStyle("-fx-text-fill: #6B7280; -fx-font-family: 'Segoe UI'; " +
-                           "-fx-font-size: 13px; -fx-padding: 16;");
+            empty.getStyleClass().add("balance-empty-label");
             breakdownContainer.getChildren().add(empty);
             totalsRow.setVisible(false);
             totalsRow.setManaged(false);

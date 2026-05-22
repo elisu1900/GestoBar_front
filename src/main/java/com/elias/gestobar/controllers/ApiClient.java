@@ -56,7 +56,7 @@ public class ApiClient {
             handleStatus(response.statusCode());
             return response.body();
         } catch (IOException | InterruptedException e) {
-            throw new ApiException("No se pudo conectar con el servidor");
+            throw new ApiException("Unable to connect to the server");
         }
     }
 
@@ -120,7 +120,7 @@ public class ApiClient {
             handleStatus(response.statusCode());
             return JsonMapper.fromJson(response.body(), responseType);
         } catch (IOException | InterruptedException e) {
-            throw new ApiException("No se pudo conectar con el servidor");
+            throw new ApiException("Unable to connect to the server");
         }
     }
 
@@ -129,17 +129,17 @@ public class ApiClient {
             var response = client.send(request, HttpResponse.BodyHandlers.ofString());
             handleStatus(response.statusCode());
         } catch (IOException | InterruptedException e) {
-            throw new ApiException("No se pudo conectar con el servidor");
+            throw new ApiException("Unable to connect to the server");
         }
     }
 
     private void handleStatus(int status) throws ApiException {
         switch (status) {
-            case 401 -> throw new ApiException("No autorizado. Inicia sesión.", 401);
-            case 403 -> throw new ApiException("Acceso denegado.", 403);
-            case 404 -> throw new ApiException("Recurso no encontrado.", 404);
+            case 401 -> throw new ApiException("Unauthorized. Please log in.", 401);
+            case 403 -> throw new ApiException("Access denied.", 403);
+            case 404 -> throw new ApiException("Resource not found.", 404);
             case 204 -> {}
-            default  -> { if (status >= 400) throw new ApiException("Error del servidor: " + status, status); }
+            default  -> { if (status >= 400) throw new ApiException("Server error: " + status, status); }
         }
     }
 

@@ -11,6 +11,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.FlowPane;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -75,8 +78,10 @@ public class TablePanelController {
     }
 
     private void renderTables(List<TableDto> tables) {
+        List<TableDto> sorted = new ArrayList<>(tables);
+        Collections.sort(sorted, Comparator.comparingInt(TableDto::number));
         tablesContainer.getChildren().clear();
-        for (TableDto table : tables) {
+        for (TableDto table : sorted) {
             tablesContainer.getChildren().add(createTableButton(table));
         }
     }
@@ -224,7 +229,9 @@ public class TablePanelController {
             selectedTable  = null;
             tablesContainer.getChildren().clear();
 
-            for (TableDto table : result.tables()) {
+            List<TableDto> sorted = new ArrayList<>(result.tables());
+            Collections.sort(sorted, Comparator.comparingInt(TableDto::number));
+            for (TableDto table : sorted) {
                 Button btn = createTableButton(table);
                 tablesContainer.getChildren().add(btn);
                 if (table.tableId().equals(targetTableId)) {

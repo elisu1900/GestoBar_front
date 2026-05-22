@@ -143,14 +143,14 @@ public class ApiClient {
 
     private void handleStatus(int status, String body) throws ApiException {
         switch (status) {
-            case 400 -> throw new ApiException(parseErrorMessage(body, "Datos incorrectos."), 400);
-            case 401 -> throw new ApiException("No autorizado. Inicia sesión.", 401);
-            case 403 -> throw new ApiException("Acceso denegado.", 403);
-            case 404 -> throw new ApiException("Recurso no encontrado.", 404);
-            case 409 -> throw new ApiException(parseErrorMessage(body, "El recurso ya existe."), 409);
+            case 400 -> throw new ApiException(parseErrorMessage(body, "Invalid data."), 400);
+            case 401 -> throw new ApiException("Unauthorized. Please log in.", 401);
+            case 403 -> throw new ApiException("Access denied.", 403);
+            case 404 -> throw new ApiException("Resource not found.", 404);
+            case 409 -> throw new ApiException(parseErrorMessage(body, "Resource already exists."), 409);
             case 204 -> {}
             default  -> { if (status >= 400) throw new ApiException(
-                    parseErrorMessage(body, "Error del servidor: " + status), status); }
+                    parseErrorMessage(body, "Server error: " + status), status); }
         }
     }
 

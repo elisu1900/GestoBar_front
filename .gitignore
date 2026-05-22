@@ -1,6 +1,11 @@
 # ---- Gradle ----
 .gradle/
-build/
+build/*
+!build/jpackage/
+build/jpackage/*
+!build/jpackage/GestoBar/
+build/jpackage/GestoBar/*
+!build/jpackage/GestoBar/GestoBar-1.0.0.exe
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/

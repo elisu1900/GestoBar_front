@@ -9,6 +9,7 @@ import com.elias.gestobar.service.TicketApiService;
 import com.elias.gestobar.util.AlertHelper;
 import com.elias.gestobar.util.ApiException;
 import javafx.concurrent.Task;
+import javafx.geometry.Pos;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -81,7 +82,7 @@ public class ProductPanelController {
         price.getStyleClass().add("product-price");
 
         VBox cell = new VBox(2, btn, price);
-        cell.setStyle("-fx-alignment: CENTER;");
+        cell.setAlignment(Pos.CENTER);
         return cell;
     }
 

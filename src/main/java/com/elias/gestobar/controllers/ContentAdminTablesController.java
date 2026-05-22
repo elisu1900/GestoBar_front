@@ -17,6 +17,9 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class ContentAdminTablesController {
@@ -48,8 +51,10 @@ public class ContentAdminTablesController {
     }
 
     private void renderTables(List<TableDto> tables) {
+        List<TableDto> sorted = new ArrayList<>(tables);
+        Collections.sort(sorted, Comparator.comparingInt(TableDto::number));
         tableListContainer.getChildren().clear();
-        for (TableDto table : tables) {
+        for (TableDto table : sorted) {
             tableListContainer.getChildren().add(buildTableRow(table));
         }
     }

@@ -1,6 +1,7 @@
 package com.elias.gestobar.controllers;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,18 +16,19 @@ public class CalculatorController {
     private double  firstOperand = 0;
     private boolean newInput     = false;
 
+    private final EventHandler<KeyEvent> keyFilter = this::handleKeyPressed;
+
     @FXML
     private void initialize() {
         display.sceneProperty().addListener((obs, oldScene, newScene) -> {
-            if (newScene != null) {
-                newScene.addEventFilter(KeyEvent.KEY_PRESSED, this::handleKeyPressed);
-            }
+            if (oldScene != null) oldScene.removeEventFilter(KeyEvent.KEY_PRESSED, keyFilter);
+            if (newScene != null) newScene.addEventFilter(KeyEvent.KEY_PRESSED, keyFilter);
         });
     }
 
     private void handleKeyPressed(KeyEvent e) {
         switch (e.getCode()) {
-            case NUMPAD0, DIGIT0 -> appendDigit("0");
+            case NUMPAD0, DIGIT0 -> { if ("=".equals(e.getCharacter())) calculate(); else appendDigit("0"); }
             case NUMPAD1, DIGIT1 -> appendDigit("1");
             case NUMPAD2, DIGIT2 -> appendDigit("2");
             case NUMPAD3, DIGIT3 -> appendDigit("3");
@@ -44,8 +46,9 @@ public class CalculatorController {
             case ENTER, EQUALS    -> calculate();
             case BACK_SPACE       -> backspace();
             case ESCAPE           -> clear();
-            default -> {}
+            default               -> { return; }
         }
+        e.consume();
     }
 
     @FXML

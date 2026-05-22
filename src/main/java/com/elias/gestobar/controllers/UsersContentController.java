@@ -6,6 +6,7 @@ import com.elias.gestobar.service.UserApiService;
 import com.elias.gestobar.util.AlertHelper;
 import com.elias.gestobar.util.ApiException;
 import javafx.collections.FXCollections;
+import javafx.geometry.Pos;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -67,7 +68,7 @@ public class UsersContentController {
         nameLabel.getStyleClass().add("product-row-label");
 
         HBox nameBox = new HBox(10, avatar, nameLabel);
-        nameBox.setStyle("-fx-alignment: CENTER_LEFT;");
+        nameBox.setAlignment(Pos.CENTER_LEFT);
         nameBox.setPrefWidth(300);
 
         Label roleLabel = new Label(getRoleDisplay(user));
@@ -75,7 +76,7 @@ public class UsersContentController {
 
         HBox roleBox = new HBox(roleLabel);
         roleBox.setPrefWidth(200);
-        roleBox.setStyle("-fx-alignment: CENTER_LEFT;");
+        roleBox.setAlignment(Pos.CENTER_LEFT);
 
         Region spacer = new Region();
         HBox.setHgrow(spacer, javafx.scene.layout.Priority.ALWAYS);

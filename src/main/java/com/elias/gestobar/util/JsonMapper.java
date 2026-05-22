@@ -19,7 +19,7 @@ public class JsonMapper {
         try {
             return mapper.writeValueAsString(object);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException("Error al serializar a JSON: " + e.getMessage(), e);
+            throw new RuntimeException("Failed to serialize to JSON: " + e.getMessage(), e);
         }
     }
 
@@ -27,18 +27,17 @@ public class JsonMapper {
         try {
             return mapper.readValue(json, clazz);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException("Error al deserializar JSON: " + e.getMessage(), e);
+            throw new RuntimeException("Failed to deserialize JSON: " + e.getMessage(), e);
         }
     }
 
-    // mapper para listas
     public static <T> List<T> fromJsonList(String json, Class<T> clazz) {
         try {
             var type = mapper.getTypeFactory()
                     .constructCollectionType(List.class, clazz);
             return mapper.readValue(json, type);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException("Error al deserializar lista JSON: " + e.getMessage(), e);
+            throw new RuntimeException("Failed to deserialize JSON list: " + e.getMessage(), e);
         }
     }
 }

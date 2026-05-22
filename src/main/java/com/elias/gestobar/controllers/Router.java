@@ -25,14 +25,14 @@ public class Router {
     public static void goTo(String fxmlName, Role requiredRole) {
         if (requiredRole != null
                 && SessionManager.getInstance().getRole() != requiredRole) {
-            AlertHelper.showError("Acceso denegado",
-                    "No tienes permiso para acceder a esta pantalla.");
+            AlertHelper.showError("Access denied",
+                    "You don't have permission to access this screen.");
             return;
         }
 
         try {
             var url = Router.class.getResource("/com/elias/gestobar/view/" + fxmlName + ".fxml");
-            if (url == null) throw new IOException("FXML no encontrado: " + fxmlName);
+            if (url == null) throw new IOException("FXML not found: " + fxmlName);
 
             FXMLLoader loader = new FXMLLoader(url);
             loader.setClassLoader(Router.class.getClassLoader());
@@ -61,8 +61,8 @@ public class Router {
                 }
                 fw.write("\n");
             } catch (Exception ignored) {}
-            AlertHelper.showError("Error de navegación",
-                    "No se pudo cargar la pantalla: " + fxmlName + "\n" + e.getMessage());
+            AlertHelper.showError("Navigation error",
+                    "Failed to load screen: " + fxmlName + "\n" + e.getMessage());
         }
     }
 

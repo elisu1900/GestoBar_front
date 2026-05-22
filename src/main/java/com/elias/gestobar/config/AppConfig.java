@@ -12,7 +12,7 @@ public class AppConfig {
             if (is == null) throw new RuntimeException("No se encontró app.properties");
             props.load(is);
         } catch (IOException e) {
-            throw new RuntimeException("Error al cargar app.properties", e);
+            throw new RuntimeException("Failed to load app.properties", e);
         }
     }
 
@@ -60,7 +60,7 @@ public class AppConfig {
     private static String get(String key) {
         String value = props.getProperty(key);
         if (value == null || value.isBlank())
-            throw new RuntimeException("Propiedad no encontrada: " + key);
+            throw new RuntimeException("Property not found: " + key);
         return value.trim();
     }
 

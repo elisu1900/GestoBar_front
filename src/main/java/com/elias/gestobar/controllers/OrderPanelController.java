@@ -223,50 +223,46 @@ public class OrderPanelController {
         modal.setResizable(false);
 
         Label titleLbl = new Label("Collect Payment");
-        titleLbl.setStyle("-fx-font-family: 'Segoe UI'; -fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #1F2937;");
+        titleLbl.getStyleClass().add("modal-title-lg");
 
         Separator sep1 = new Separator();
 
         Label inputLbl = new Label("Amount given by customer:");
-        inputLbl.setStyle("-fx-font-family: 'Segoe UI'; -fx-font-size: 13px; -fx-text-fill: #6B7280;");
+        inputLbl.getStyleClass().add("modal-label");
 
         TextField amountField = new TextField();
         amountField.setPromptText("0.00");
-        amountField.setStyle("-fx-font-family: 'Segoe UI'; -fx-font-size: 15px; -fx-padding: 8 12 8 12; "
-                + "-fx-border-color: #D1D5DB; -fx-border-width: 1; -fx-border-radius: 6; "
-                + "-fx-background-radius: 6; -fx-background-color: #F9FAFB;");
+        amountField.getStyleClass().add("modal-input");
 
         Label totalLbl = new Label(String.format("Amount to charge:  %.2f €", total));
-        totalLbl.setStyle("-fx-font-family: 'Segoe UI'; -fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #5B9BD5;");
+        totalLbl.getStyleClass().add("modal-amount-total");
 
         Label changeLbl = new Label("Change to return:  —");
-        changeLbl.setStyle("-fx-font-family: 'Segoe UI'; -fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #9CA3AF;");
+        changeLbl.getStyleClass().add("modal-amount-change");
 
         amountField.textProperty().addListener((obs, oldVal, newVal) -> {
             try {
                 BigDecimal given = new BigDecimal(newVal.replace(",", "."));
                 BigDecimal change = given.subtract(total);
-                String color = change.compareTo(BigDecimal.ZERO) >= 0 ? "#22C55E" : "#EF4444";
                 changeLbl.setText(String.format("Change to return:  %.2f €", change));
-                changeLbl.setStyle("-fx-font-family: 'Segoe UI'; -fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: " + color + ";");
+                changeLbl.getStyleClass().removeAll("modal-change-positive", "modal-change-negative");
+                changeLbl.getStyleClass().add(
+                    change.compareTo(BigDecimal.ZERO) >= 0 ? "modal-change-positive" : "modal-change-negative"
+                );
             } catch (NumberFormatException ex) {
                 changeLbl.setText("Change to return:  —");
-                changeLbl.setStyle("-fx-font-family: 'Segoe UI'; -fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #9CA3AF;");
+                changeLbl.getStyleClass().removeAll("modal-change-positive", "modal-change-negative");
             }
         });
 
         Separator sep2 = new Separator();
 
         Button cancelBtn = new Button("Cancel");
-        cancelBtn.setStyle("-fx-background-color: #F3F4F6; -fx-text-fill: #374151; -fx-font-family: 'Segoe UI'; "
-                + "-fx-font-size: 13px; -fx-font-weight: bold; -fx-padding: 8 20 8 20; "
-                + "-fx-background-radius: 6; -fx-border-color: #D1D5DB; -fx-border-radius: 6; -fx-cursor: hand;");
+        cancelBtn.getStyleClass().add("modal-btn-cancel");
         cancelBtn.setOnAction(e -> modal.close());
 
         Button confirmBtn = new Button("Charge");
-        confirmBtn.setStyle("-fx-background-color: #22C55E; -fx-text-fill: white; -fx-font-family: 'Segoe UI'; "
-                + "-fx-font-size: 13px; -fx-font-weight: bold; -fx-padding: 8 20 8 20; "
-                + "-fx-background-radius: 6; -fx-border-color: transparent; -fx-cursor: hand;");
+        confirmBtn.getStyleClass().add("modal-btn-confirm");
         confirmBtn.setOnAction(e -> {
             modal.close();
             doCloseBill();
@@ -277,9 +273,13 @@ public class OrderPanelController {
 
         VBox root = new VBox(16, titleLbl, sep1, inputLbl, amountField, totalLbl, changeLbl, sep2, buttons);
         root.setPadding(new Insets(28));
-        root.setStyle("-fx-background-color: white;");
+        root.getStyleClass().add("modal-content");
 
-        modal.setScene(new Scene(root, 480, 340));
+        Scene scene = new Scene(root, 480, 340);
+        scene.getStylesheets().add(
+            getClass().getResource("/com/elias/gestobar/css/styles.css").toExternalForm()
+        );
+        modal.setScene(scene);
         modal.showAndWait();
     }
 
@@ -311,8 +311,6 @@ public class OrderPanelController {
         }
     }
 
-    // ── Mover mesa ────────────────────────────────────────────────────────────
-
     @FXML
     private void handleMoveTable() {
         if (currentTicket == null) return;
@@ -338,11 +336,11 @@ public class OrderPanelController {
         tablesPane.setVgap(10);
 
         Label legendFree  = new Label("● Free");
-        legendFree.setStyle("-fx-text-fill:#22C55E;-fx-font-size:11px;-fx-font-family:'Segoe UI';");
+        legendFree.getStyleClass().addAll("legend-label", "legend-label-free");
         Label legendEmpty = new Label("● Empty ticket");
-        legendEmpty.setStyle("-fx-text-fill:#F59E0B;-fx-font-size:11px;-fx-font-family:'Segoe UI';");
+        legendEmpty.getStyleClass().addAll("legend-label", "legend-label-empty");
         Label legendBusy  = new Label("● Occupied");
-        legendBusy.setStyle("-fx-text-fill:#EF4444;-fx-font-size:11px;-fx-font-family:'Segoe UI';");
+        legendBusy.getStyleClass().addAll("legend-label", "legend-label-busy");
         HBox legend = new HBox(16, legendFree, legendEmpty, legendBusy);
         legend.setAlignment(Pos.CENTER_LEFT);
 
@@ -415,48 +413,46 @@ public class OrderPanelController {
 
     private Button buildMoveTableBtn(TableWithStatus tws, Stage modal) {
         Label numLbl = new Label("Table " + tws.table().number());
-        numLbl.setStyle("-fx-font-family:'Segoe UI';-fx-font-size:12px;-fx-font-weight:bold;-fx-text-fill:#1F2937;");
+        numLbl.getStyleClass().add("move-table-num");
 
-        String dot, dotColor, bg, border;
+        String statusText;
+        String statusClass;
         boolean disabled = false;
 
         switch (tws.status()) {
             case FREE -> {
-                dot = "● Free";    dotColor = "#22C55E";
-                bg  = "#FFFFFF";   border   = "#BBF7D0";
+                statusText  = "● Free";
+                statusClass = "move-table-status-free";
             }
             case EMPTY_TICKET -> {
-                dot = "● Empty";   dotColor = "#F59E0B";
-                bg  = "#FFFBEB";   border   = "#FDE68A";
+                statusText  = "● Empty";
+                statusClass = "move-table-status-empty";
             }
             default -> {
-                dot = "● Occupied"; dotColor = "#EF4444";
-                bg  = "#F9FAFB";   border   = "#FECACA";
-                disabled = true;
+                statusText  = "● Occupied";
+                statusClass = "move-table-status-occupied";
+                disabled    = true;
             }
         }
 
-        Label statusLbl = new Label(dot);
-        statusLbl.setStyle("-fx-font-family:'Segoe UI';-fx-font-size:10px;-fx-text-fill:" + dotColor + ";");
+        Label statusLbl = new Label(statusText);
+        statusLbl.getStyleClass().addAll("move-table-status", statusClass);
 
         VBox content = new VBox(2, numLbl, statusLbl);
         content.setAlignment(Pos.CENTER);
 
+        String btnClass = switch (tws.status()) {
+            case FREE         -> "move-table-btn-free";
+            case EMPTY_TICKET -> "move-table-btn-empty";
+            default           -> "move-table-btn-occupied";
+        };
+
         Button btn = new Button();
         btn.setGraphic(content);
-        btn.setPrefWidth(94);
-        btn.setPrefHeight(66);
+        btn.getStyleClass().addAll("move-table-btn", btnClass);
         btn.setDisable(disabled);
 
-        String baseStyle  = "-fx-background-color:" + bg + ";-fx-border-color:" + border + ";"
-                + "-fx-border-width:1;-fx-border-radius:8;-fx-background-radius:8;";
-        String hoverStyle = "-fx-background-color:" + bg + ";-fx-border-color:" + dotColor + ";"
-                + "-fx-border-width:1.5;-fx-border-radius:8;-fx-background-radius:8;-fx-cursor:hand;";
-
-        btn.setStyle(baseStyle + (disabled ? "-fx-cursor:default;" : "-fx-cursor:hand;"));
         if (!disabled) {
-            btn.setOnMouseEntered(e -> btn.setStyle(hoverStyle));
-            btn.setOnMouseExited(e  -> btn.setStyle(baseStyle + "-fx-cursor:hand;"));
             btn.setOnAction(e -> doMoveTable(tws.table(), modal));
         }
 
@@ -489,8 +485,6 @@ public class OrderPanelController {
 
         new Thread(task).start();
     }
-
-    // ── Inner types ───────────────────────────────────────────────────────────
 
     private enum MoveTableStatus { FREE, EMPTY_TICKET, OCCUPIED }
     private record TableWithStatus(TableDto table, MoveTableStatus status) {}
